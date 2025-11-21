@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="en" dir="ltr" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +8,7 @@
       content="محفظة تفاعلية حديثة تعكس السيرة الذاتية مع تجربة مستخدم محسّنة ودعم كامل للوضع الداكن والفاتح."
     />
     <meta name="color-scheme" content="light dark" />
-    <title>محفظة حسين الإبداعية</title>
+    <title data-page-title>Hussein Alwisi Technical Workfile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,25 +34,50 @@
     <div class="scroll-progress" aria-hidden="true"></div>
 
     <header class="site-header" data-sticky>
-      <div class="site-header__brand">
-        <span class="brand-mark" data-brand-mark aria-hidden="true"></span>
-        <div>
-          <strong data-brand-name></strong>
-          <span data-brand-tagline></span>
-        </div>
-      </div>
-      <nav class="site-header__nav" aria-label="التنقل الرئيسي">
-        <a href="#home" data-nav="home"></a>
-        <a href="#impact" data-nav="impact"></a>
-        <a href="#experience" data-nav="experience"></a>
-        <a href="#skills" data-nav="skills"></a>
-        <a href="#work" data-nav="work"></a>
-        <a href="#lab" data-nav="lab"></a>
-        <a href="#contact" data-nav="contact"></a>
-      </nav>
-      <div class="site-header__actions">
-        <button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language"></button>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="تبديل نظام الألوان">
+      <div class="site-header__inner">
+        <a class="site-header__brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg class="brand-mark__svg" viewBox="0 0 32 32" role="presentation">
+              <circle cx="16" cy="16" r="12.5" fill="none" stroke="rgba(255, 255, 255, 0.25)" stroke-width="1.5" />
+              <path
+                d="M13.5 10.5 8.75 16l4.75 5.5M18.5 10.5l4.75 5.5-4.75 5.5"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <div class="site-header__brand-text">
+            <strong data-brand-name>Hussein Alwisi</strong>
+            <span data-brand-tagline>.NET Software Engineer</span>
+          </div>
+        </a>
+        <nav class="site-header__nav" aria-label="التنقل الرئيسي">
+          <a href="#home" data-nav="home"></a>
+          <a href="#impact" data-nav="impact"></a>
+          <a href="#experience" data-nav="experience"></a>
+          <a href="#skills" data-nav="skills"></a>
+          <a href="#work" data-nav="work"></a>
+          <a href="#lab" data-nav="lab"></a>
+          <a href="#contact" data-nav="contact"></a>
+        </nav>
+        <div class="site-header__actions">
+          <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle menu">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+            </svg>
+          </button>
+          <button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language"></button>
+          <button class="palette-toggle" type="button" data-accent-toggle aria-label="Cycle accent theme">
+            <svg viewBox="0 0 24 24" role="presentation">
+              <circle cx="12" cy="12" r="9" fill="none" stroke-width="1.8" />
+              <path d="M12 3v6M12 15v6M3 12h6M15 12h6" fill="none" stroke-width="1.8" stroke-linecap="round" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="تبديل نظام الألوان">
           <span class="theme-icon theme-icon--sun" aria-hidden="true">
             <svg viewBox="0 0 24 24" role="presentation">
               <circle cx="12" cy="12" r="5"></circle>
@@ -84,10 +109,10 @@
       <section class="hero" id="home">
         <div class="hero__content">
           <p class="eyebrow" data-hero-title>...</p>
-          <h1>
-            <span data-hero-name>...</span>
+          <h1 data-hero-name>...</h1>
+          <div class="hero__dynamic-wrapper">
             <span class="hero__dynamic" data-hero-dynamic>يصمم استراتيجيات التجربة</span>
-          </h1>
+          </div>
           <p class="hero__bio" data-hero-bio>
             ...
           </p>
@@ -115,7 +140,7 @@
             <span></span>
           </div>
           <figure class="hero__photo">
-            <img data-hero-photo src="" alt="صورة شخصية" loading="lazy" decoding="async" />
+            <img data-hero-photo src="" alt="صورة شخصية" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false" />
           </figure>
           <div class="hero__badge">
             <p data-hero-score-label>مؤشرات الأداء</p>
@@ -200,28 +225,29 @@
         <div class="contact__panel">
           <div class="contact__info" data-contact-info></div>
           <form class="contact__form" data-contact-form novalidate>
-            <label>
-              <span data-contact-label="name"></span>
-              <input type="text" name="name" required data-contact-placeholder="name" />
-            </label>
-            <label>
-              <span data-contact-label="email"></span>
-              <input type="email" name="email" required data-contact-placeholder="email" />
-            </label>
-            <label>
-              <span data-contact-label="type"></span>
-              <select name="type" required data-contact-select>
-                <option value="" data-contact-option="default"></option>
-                <option value="website" data-contact-option="website"></option>
-                <option value="consulting" data-contact-option="consulting"></option>
-                <option value="workshop" data-contact-option="workshop"></option>
+            <div class="contact__field">
+              <label for="contact-name" data-contact-label="name">Full name</label>
+              <input id="contact-name" type="text" name="name" required placeholder="e.g. Abdullah Al Salem" data-contact-placeholder="name" />
+            </div>
+            <div class="contact__field">
+              <label for="contact-email" data-contact-label="email">Email</label>
+              <input id="contact-email" type="email" name="email" required placeholder="you@email.com" data-contact-placeholder="email" />
+            </div>
+            <div class="contact__field">
+              <label for="contact-type" data-contact-label="type">Project type</label>
+              <select id="contact-type" name="type" required data-contact-select>
+                <option value="" data-contact-option="default">Select project type</option>
+                <option value="website" data-contact-option="website">Web / desktop application</option>
+                <option value="consulting" data-contact-option="consulting">.NET or database consulting</option>
+                <option value="workshop" data-contact-option="workshop">Workshop / training support</option>
               </select>
-            </label>
-            <label>
-              <span data-contact-label="message"></span>
-              <textarea name="message" rows="4" data-contact-placeholder="message"></textarea>
-            </label>
-            <button class="button" type="submit" data-contact-submit></button>
+            </div>
+            <div class="contact__field">
+              <label for="contact-message" data-contact-label="message">Project summary</label>
+              <textarea id="contact-message" name="message" rows="4" placeholder="Share the goal, scope, and target date" data-contact-placeholder="message"></textarea>
+            </div>
+            <button class="button" type="submit" data-contact-submit>Send request</button>
+            <p class="contact__feedback" data-contact-feedback></p>
             <p class="contact__feedback" data-contact-note></p>
           </form>
         </div>
@@ -233,7 +259,10 @@
         <strong data-footer-name></strong>
         <p data-footer-role></p>
       </div>
-      <p data-footer-copy></p>
+      <div class="site-footer__copy">
+        <p data-footer-copy-primary></p>
+        <p data-footer-copy-secondary></p>
+      </div>
     </footer>
 
     <script type="module" src="scripts/app.js"></script>

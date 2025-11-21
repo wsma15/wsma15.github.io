@@ -9,7 +9,7 @@ const resolveLanguage = () => {
   if (stored && supportedLanguages.includes(stored)) return stored;
   const htmlLang = document.documentElement.lang;
   if (htmlLang && supportedLanguages.includes(htmlLang)) return htmlLang;
-  return "ar";
+  return "en";
 };
 
 let currentLang = resolveLanguage();
@@ -18,10 +18,31 @@ let heroRoles = [];
 let labSteps = [];
 let heroCycleId;
 let contactSuccessTemplate = "";
+const accentThemes = [
+  {
+    name: "violet",
+    accent: "#5046ff",
+    strong: "#ff8ba7",
+    gradient: "linear-gradient(120deg, #5046ff, #7c3aed, #ff7eb3)",
+  },
+  {
+    name: "teal",
+    accent: "#0fa9b5",
+    strong: "#f9a826",
+    gradient: "linear-gradient(120deg, #0fa9b5, #00c9a7, #f9a826)",
+  },
+  {
+    name: "amber",
+    accent: "#ff8a4c",
+    strong: "#ffd166",
+    gradient: "linear-gradient(120deg, #ff8a4c, #ff4d6d, #ffd166)",
+  },
+];
 
 const init = () => {
   if (!activeData) return;
   applyLanguageAttributes();
+  updateDocumentTitle();
   renderBrand(activeData.hero);
   renderNav(activeData.copy?.nav);
   renderSectionCopy(activeData.copy?.sections);
@@ -46,22 +67,65 @@ const init = () => {
   initLabInteractions();
   initContactForm();
   initSmoothScroll();
+  initRevealAnimations();
+  initHeroParallax();
+    initAccentToggle();
+    initNavToggle();
 };
 
+  /* Mobile nav toggle: show/hide centered nav on small screens */
+  const initNavToggle = () => {
+    const header = document.querySelector(".site-header");
+    const toggle = document.querySelector("[data-nav-toggle]");
+    const nav = document.querySelector(".site-header__nav");
+    if (!header || !toggle || !nav) return;
+
+    const closeNav = () => header.classList.remove("is-nav-open");
+    const openNav = () => header.classList.add("is-nav-open");
+
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      header.classList.toggle("is-nav-open");
+    });
+
+    // close when clicking outside the nav panel
+    document.addEventListener("click", (ev) => {
+      if (!header.classList.contains("is-nav-open")) return;
+      if (header.contains(ev.target)) return; // clicked inside header
+      closeNav();
+    });
+
+    // close on escape key
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape") closeNav();
+    });
+
+    // close when a nav link is clicked (single page anchors)
+    nav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        closeNav();
+      });
+    });
+  };
 const applyLanguageAttributes = () => {
   const isArabic = currentLang === "ar";
   document.documentElement.lang = isArabic ? "ar" : "en";
   document.documentElement.dir = isArabic ? "rtl" : "ltr";
   document.body.classList.toggle("lang-en", !isArabic);
+  document.body.classList.toggle("lang-rtl", isArabic);
   activeData = resumeData[currentLang] || resumeData.ar || Object.values(resumeData)[0];
   heroRoles = Array.isArray(activeData?.hero?.dynamicRoles) ? activeData.hero.dynamicRoles : [];
   labSteps = Array.isArray(activeData?.lab) ? activeData.lab : [];
 };
 
-const renderBrand = (hero = {}) => {
-  const mark = $("[data-brand-mark]");
-  if (mark) mark.textContent = hero.brandMark || hero.name?.[0] || "";
+const updateDocumentTitle = () => {
+  const title = activeData?.pageTitle || activeData?.hero?.name || "Portfolio";
+  document.title = title;
+  const titleEl = document.querySelector("title[data-page-title]");
+  if (titleEl) titleEl.textContent = title;
+};
 
+const renderBrand = (hero = {}) => {
   const name = $("[data-brand-name]");
   if (name) name.textContent = hero.name || "";
 
@@ -165,7 +229,7 @@ const renderStats = (stats = []) => {
       (stat) => `
       <article class="stat-card">
         <span class="eyebrow">${stat.label ?? ""}</span>
-        <strong data-countup data-value="${stat.value ?? 0}" data-suffix="${stat.suffix ?? ""}">
+        <strong data-countup data-value="${computeDynamicStatValue(stat)}" data-suffix="${stat.suffix ?? ""}">
           0${stat.suffix ?? ""}
         </strong>
         <p>${stat.description ?? ""}</p>
@@ -173,6 +237,15 @@ const renderStats = (stats = []) => {
     `
     )
     .join("");
+};
+
+const computeDynamicStatValue = (stat = {}) => {
+  if (stat.dynamic?.type === "experienceYears") {
+    const since = Number(stat.dynamic.since) || new Date().getFullYear();
+    const years = Math.max(1, new Date().getFullYear() - since);
+    return years;
+  }
+  return stat.value ?? 0;
 };
 
 const renderTimeline = (experiences = []) => {
@@ -326,19 +399,36 @@ const updateLabDetail = (index = 0) => {
 const renderContact = (contact = {}) => {
   const info = $("[data-contact-info]");
   if (info) {
-    info.innerHTML = `
+    const segments = [];
+    segments.push(`
       <div>
         <span class="meta-label">${contact.labels?.email ?? ""}</span>
         <p><a href="mailto:${contact.email}">${contact.email ?? ""}</a></p>
       </div>
+    `);
+    segments.push(`
       <div>
         <span class="meta-label">${contact.labels?.phone ?? ""}</span>
         <p><a href="tel:${contact.phone}">${contact.phone ?? ""}</a></p>
       </div>
+    `);
+    if (contact.whatsapp) {
+      const digits = contact.whatsapp.replace(/\D/g, "");
+      const whatsappHref = digits ? `https://wa.me/${digits}` : `https://wa.me/${encodeURIComponent(contact.whatsapp)}`;
+      segments.push(`
+        <div>
+          <span class="meta-label">${contact.labels?.whatsapp ?? "WhatsApp"}</span>
+          <p><a href="${whatsappHref}" target="_blank" rel="noopener">${contact.whatsapp}</a></p>
+        </div>
+      `);
+    }
+    segments.push(`
       <div>
         <span class="meta-label">${contact.labels?.city ?? ""}</span>
         <p>${contact.city ?? ""}</p>
       </div>
+    `);
+    segments.push(`
       <div>
         <span class="meta-label">${contact.labels?.socials ?? ""}</span>
         <p>
@@ -347,7 +437,9 @@ const renderContact = (contact = {}) => {
             .join(" • ")}
         </p>
       </div>
-    `;
+    `);
+
+    info.innerHTML = segments.join("");
   }
 
   const form = $("[data-contact-form]");
@@ -389,11 +481,16 @@ const renderFooter = (hero = {}, footerCopy = {}) => {
   const roleEl = $("[data-footer-role]");
   if (roleEl) roleEl.textContent = hero.footerRole || hero.brandTagline || hero.title || "";
 
-  const copyEl = $("[data-footer-copy]");
-  if (copyEl) {
-    const template = footerCopy.note || "";
-    const year = new Date().getFullYear();
-    copyEl.textContent = template.replace("{year}", year);
+  const year = new Date().getFullYear();
+  const copyPrimary = $("[data-footer-copy-primary]");
+  const copySecondary = $("[data-footer-copy-secondary]");
+  if (copyPrimary) {
+    const text = footerCopy.secondary || "";
+    copyPrimary.textContent = text;
+  }
+  if (copySecondary) {
+    const template = footerCopy.primary || "";
+    copySecondary.textContent = template.replace("{year}", year);
   }
 };
 
@@ -618,6 +715,62 @@ const initSmoothScroll = () => {
         target.scrollIntoView({ behavior: "smooth" });
       }
     });
+  });
+};
+
+const initRevealAnimations = () => {
+  const targets = $$(".hero, .section, .site-footer, .timeline-item, .case-card, .skill-card, .lab-card, .testimonial-card");
+  if (!targets.length) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2, rootMargin: "0px 0px -40px 0px" }
+  );
+  targets.forEach((target) => observer.observe(target));
+};
+
+const initHeroParallax = () => {
+  const hero = $(".hero");
+  if (!hero) return;
+  const update = (event) => {
+    const rect = hero.getBoundingClientRect();
+    const x = event.clientX - (rect.left + rect.width / 2);
+    const y = event.clientY - (rect.top + rect.height / 2);
+    hero.style.setProperty("--hero-cursor-x", `${x}`);
+    hero.style.setProperty("--hero-cursor-y", `${y}`);
+  };
+  hero.addEventListener("pointermove", update);
+  hero.addEventListener("pointerleave", () => {
+    hero.style.setProperty("--hero-cursor-x", "0");
+    hero.style.setProperty("--hero-cursor-y", "0");
+  });
+};
+
+const applyAccentTheme = (theme) => {
+  if (!theme) return;
+  const root = document.documentElement;
+  root.style.setProperty("--accent", theme.accent);
+  root.style.setProperty("--accent-strong", theme.strong);
+  root.style.setProperty("--accent-grad", theme.gradient);
+};
+
+const initAccentToggle = () => {
+  const button = $("[data-accent-toggle]");
+  if (!button || !accentThemes.length) return;
+  let index = Number(localStorage.getItem("proto-accent-index") ?? "0");
+  if (!accentThemes[index]) index = 0;
+  applyAccentTheme(accentThemes[index]);
+
+  button.addEventListener("click", () => {
+    index = (index + 1) % accentThemes.length;
+    applyAccentTheme(accentThemes[index]);
+    localStorage.setItem("proto-accent-index", String(index));
   });
 };
 

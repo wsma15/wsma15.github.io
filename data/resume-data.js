@@ -1,9 +1,10 @@
 export const resumeData = {
   ar: {
+    pageTitle: "حسين الويسي مهندس برمجيات .NET",
     hero: {
       name: "حسين الويسي",
       brandMark: "ح",
-      brandTagline: "مهندس برمجيات .NET وتطبيقات أعمال",
+      brandTagline: "مهندس برمجيات ‎.NET‎",
       footerRole: "مهندس برمجيات .NET وتطبيقات مؤسسية",
       title: "مهندس برمجيات .NET",
       location: "إربد، الأردن",
@@ -15,6 +16,7 @@ export const resumeData = {
       photo: "assets/Me.jpeg",
       photoAlt: "صورة حسين الويسي",
       chips: [
+        "C# / VB.NET",
         "WinForms & DevExpress",
         "ASP.NET MVC / WebForms",
         "SQL Server & Entity Framework",
@@ -22,7 +24,7 @@ export const resumeData = {
       ],
       dynamicRoles: ["يبني حلول محاسبة موثوقة", "يطور بوابات ‎.NET‎ مؤسسية", "يعتمد على القياسات قبل الإطلاق"],
       clientsHeading: "منصات ساهمت في تطويرها",
-      clients: ["Mozon Accounting", "HR Org Builder", "School Docs", "PureActive"],
+      clients: ["Mozon Accounting", "HR Org Builder", "Attachments", "PureActive"],
       score: 35,
       scoreSuffix: "%",
       scoreLabel: "تسريع العمليات",
@@ -79,12 +81,21 @@ export const resumeData = {
         },
       },
       labDetail: { eyebrow: "تفاصيل المرحلة" },
-      footer: { note: "© {year} جميع الحقوق محفوظة. أعمل على بناء حلول برمجية ذات أثر." },
+      footer: {
+        primary: "© {year} جميع الحقوق محفوظة.",
+        secondary: "أعمل على بناء حلول برمجية ذات أثر.",
+      },
     },
-    stats: [
-      {
-        label: "تقليل وقت تجهيز القيود",
-        value: 35,
+  stats: [
+    {
+      label: "سنوات الخبرة",
+      dynamic: { type: "experienceYears", since: 2017 },
+      suffix: "+",
+      description: "تطوير حلول برمجية منذ عام 2017 مع تنوع في الأنظمة المالية والتعليمية.",
+    },
+    {
+      label: "تقليل وقت تجهيز القيود",
+      value: 35,
         suffix: "%",
         description: "أتمتة مخطط الحسابات في منظومة Mozon خفّضت الوقت الذي يحتاجه فريق المالية لإعداد القيود.",
       },
@@ -192,7 +203,7 @@ export const resumeData = {
         "ضبط الصلاحيات وتوثيق المتطلبات بدقة.",
       ],
       technical: [
-        { name: "C# / .NET", level: 90, detail: "تطوير تطبيقات سطح المكتب والويب." },
+        { name: "C# / VB.NET / .NET", level: 90, detail: "تطوير تطبيقات سطح المكتب والويب." },
         {
           name: "ASP.NET MVC & WebForms",
           level: 88,
@@ -268,10 +279,11 @@ export const resumeData = {
       },
     ],
     contact: {
-      labels: { email: "البريد", phone: "الهاتف", city: "الموقع", socials: "المنصات" },
+      labels: { email: "البريد", phone: "الهاتف", whatsapp: "واتساب", city: "الموقع", socials: "المنصات" },
       email: "hussein.alwisi@outlook.com",
       phone: "+962 790119021",
-      city: "إربد – متاح للعمل عن بُعد أو المختلط",
+      whatsapp: "+962 790119021",
+      city: "إربد – متاح للعمل عن بُعد، الهجين، أو الحضوري",
       socials: [
         { label: "GitHub", url: "https://github.com/wsma15" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/halwisi" },
@@ -301,10 +313,11 @@ export const resumeData = {
     },
   },
   en: {
+    pageTitle: "Hussein Alwisi .NET Software Engineer",
     hero: {
       name: "Hussein Alwisi",
       brandMark: "H",
-      brandTagline: ".NET Software Engineer & Business Apps",
+      brandTagline: ".NET Software Engineer",
       footerRole: ".NET Software Engineer",
       title: ".NET Software Engineer",
       location: "Irbid, Jordan",
@@ -316,6 +329,7 @@ export const resumeData = {
       photo: "assets/Me.jpeg",
       photoAlt: "Hussein Alwisi portrait",
       chips: [
+        "C# / VB.NET",
         "WinForms & DevExpress",
         "ASP.NET MVC / WebForms",
         "SQL Server & EF",
@@ -323,7 +337,7 @@ export const resumeData = {
       ],
       dynamicRoles: ["Builds reliable accounting tools", "Ships enterprise .NET apps", "Automates financial reporting"],
       clientsHeading: "Teams I’ve supported",
-      clients: ["Mozon Accounting", "HR Org Builder", "School Docs", "PureActive"],
+      clients: ["Mozon Accounting", "HR Org Builder", "Attachments", "PureActive"],
       score: 35,
       scoreSuffix: "%",
       scoreLabel: "Ops acceleration",
@@ -380,12 +394,21 @@ export const resumeData = {
         },
       },
       labDetail: { eyebrow: "Stage details" },
-      footer: { note: "© {year} All rights reserved. Building purposeful software." },
+      footer: {
+        primary: "© {year} All rights reserved.",
+        secondary: "Building purposeful software.",
+      },
     },
-    stats: [
-      {
-        label: "Manual journal prep saved",
-        value: 35,
+  stats: [
+    {
+      label: "Years of hands-on experience",
+      dynamic: { type: "experienceYears", since: 2017 },
+      suffix: "+",
+      description: "Building .NET systems since 2017 across finance, HR, and education products.",
+    },
+    {
+      label: "Manual journal prep saved",
+      value: 35,
         suffix: "%",
         description: "Automated chart of accounts routines inside the Mozon accounting suite.",
       },
@@ -492,7 +515,7 @@ export const resumeData = {
         "Documenting requirements and permissions clearly.",
       ],
       technical: [
-        { name: "C# / .NET", level: 90, detail: "Desktop and web application development." },
+        { name: "C# / VB.NET / .NET", level: 90, detail: "Desktop and web application development." },
         { name: "ASP.NET MVC & WebForms", level: 88, detail: "Enterprise UI with solid role management." },
         { name: "WinForms & DevExpress", level: 85, detail: "Accounting screens and interactive reports." },
         { name: "SQL Server", level: 87, detail: "Query optimization and schema design." },
@@ -561,10 +584,11 @@ export const resumeData = {
       },
     ],
     contact: {
-      labels: { email: "Email", phone: "Phone", city: "Location", socials: "Social" },
+      labels: { email: "Email", phone: "Phone", whatsapp: "WhatsApp", city: "Location", socials: "Social" },
       email: "hussein.alwisi@outlook.com",
       phone: "+962 790119021",
-      city: "Irbid, Jordan – Remote or hybrid",
+      whatsapp: "+962 790119021",
+      city: "Irbid, Jordan – Remote, hybrid, or onsite",
       socials: [
         { label: "GitHub", url: "https://github.com/wsma15" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/halwisi" },
