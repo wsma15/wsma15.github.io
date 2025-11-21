@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="محفظة تفاعلية حديثة تعكس السيرة الذاتية مع تجربة مستخدم محسّنة ودعم كامل للوضع الداكن والفاتح."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>محفظة حسين الإبداعية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (() => {
+        try {
+          const stored = localStorage.getItem("proto-theme");
+          const media = window.matchMedia("(prefers-color-scheme: dark)");
+          const theme = stored || (media.matches ? "dark" : "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.setProperty("color-scheme", theme);
+        } catch (err) {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <header class="site-header" data-sticky>
+      <div class="site-header__brand">
+        <span class="brand-mark" data-brand-mark aria-hidden="true"></span>
+        <div>
+          <strong data-brand-name></strong>
+          <span data-brand-tagline></span>
+        </div>
+      </div>
+      <nav class="site-header__nav" aria-label="التنقل الرئيسي">
+        <a href="#home" data-nav="home"></a>
+        <a href="#impact" data-nav="impact"></a>
+        <a href="#experience" data-nav="experience"></a>
+        <a href="#skills" data-nav="skills"></a>
+        <a href="#work" data-nav="work"></a>
+        <a href="#lab" data-nav="lab"></a>
+        <a href="#contact" data-nav="contact"></a>
+      </nav>
+      <div class="site-header__actions">
+        <button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language"></button>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="تبديل نظام الألوان">
+          <span class="theme-icon theme-icon--sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+              <circle cx="12" cy="12" r="5"></circle>
+              <g stroke-linecap="round">
+                <line x1="12" y1="1.5" x2="12" y2="4.5"></line>
+                <line x1="12" y1="19.5" x2="12" y2="22.5"></line>
+                <line x1="1.5" y1="12" x2="4.5" y2="12"></line>
+                <line x1="19.5" y1="12" x2="22.5" y2="12"></line>
+                <line x1="4.6" y1="4.6" x2="6.7" y2="6.7"></line>
+                <line x1="17.3" y1="17.3" x2="19.4" y2="19.4"></line>
+                <line x1="17.3" y1="6.7" x2="19.4" y2="4.6"></line>
+                <line x1="4.6" y1="19.4" x2="6.7" y2="17.3"></line>
+              </g>
+            </svg>
+          </span>
+          <span class="theme-icon theme-icon--moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+              <path
+                d="M21.5 14.5A9.5 9.5 0 0 1 9.5 2.5 9.5 9.5 0 1 0 21.5 14.5Z"
+              ></path>
+            </svg>
+          </span>
+        </button>
+        <a class="button button--ghost" data-nav-cta href="#contact"></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero__content">
+          <p class="eyebrow" data-hero-title>...</p>
+          <h1>
+            <span data-hero-name>...</span>
+            <span class="hero__dynamic" data-hero-dynamic>يصمم استراتيجيات التجربة</span>
+          </h1>
+          <p class="hero__bio" data-hero-bio>
+            ...
+          </p>
+          <div class="hero__meta">
+            <div>
+              <span class="meta-label" data-hero-meta="location"></span>
+              <strong data-hero-location>...</strong>
+            </div>
+            <div>
+              <span class="meta-label" data-hero-meta="availability"></span>
+              <strong data-hero-availability>...</strong>
+            </div>
+          </div>
+          <div class="hero__actions">
+            <a class="button" data-hero-cv href="#" target="_blank" rel="noopener"></a>
+            <a class="button button--ghost" data-scroll-to="#contact" data-hero-secondary-cta href="#contact"></a>
+          </div>
+          <div class="hero__chips" data-hero-chips></div>
+        </div>
+
+        <div class="hero__visual tilt-card" data-tilt>
+          <div class="orbital" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <figure class="hero__photo">
+            <img data-hero-photo src="" alt="صورة شخصية" loading="lazy" decoding="async" />
+          </figure>
+          <div class="hero__badge">
+            <p data-hero-score-label>مؤشرات الأداء</p>
+            <strong data-hero-score>0%</strong>
+            <small data-hero-score-caption>متوسط تحسين تدفق العمل</small>
+          </div>
+          <div class="hero__clients">
+            <p data-hero-clients-heading>بيئات عمل طبقتها</p>
+            <ul data-hero-clients></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="impact">
+        <div class="section__title">
+          <p class="eyebrow" data-section-eyebrow="impact"></p>
+          <h2 data-section-title="impact"></h2>
+          <p data-section-desc="impact"></p>
+        </div>
+        <div class="stats-grid" data-stats></div>
+      </section>
+
+      <section class="section section--alt" id="experience">
+        <div class="section__title">
+          <p class="eyebrow" data-section-eyebrow="experience"></p>
+          <h2 data-section-title="experience"></h2>
+          <p data-section-desc="experience"></p>
+        </div>
+        <div class="timeline" data-experience></div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section__title">
+          <p class="eyebrow" data-section-eyebrow="skills"></p>
+          <h2 data-section-title="skills"></h2>
+          <p data-section-desc="skills"></p>
+        </div>
+        <div class="skills" data-skills></div>
+      </section>
+
+      <section class="section section--alt" id="work">
+        <div class="section__title">
+          <p class="eyebrow" data-section-eyebrow="work"></p>
+          <h2 data-section-title="work"></h2>
+          <p data-section-desc="work"></p>
+        </div>
+        <div class="cases">
+          <div class="cases__controls">
+            <button type="button" data-case-nav="prev" data-case-nav-label="prev" aria-label="المشروع السابق">&#8678;</button>
+            <button type="button" data-case-nav="next" data-case-nav-label="next" aria-label="المشروع التالي">&#8680;</button>
+          </div>
+          <div class="cases__track" data-cases-track></div>
+          <div class="cases__progress">
+            <div class="progress-bar" data-cases-progress></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="lab">
+        <div class="section__title">
+          <p class="eyebrow" data-section-eyebrow="lab"></p>
+          <h2 data-section-title="lab"></h2>
+          <p data-section-desc="lab"></p>
+        </div>
+        <div class="lab" data-lab>
+          <div class="lab__cards" data-lab-cards></div>
+          <div class="lab__detail" data-lab-detail>
+            <p class="eyebrow" data-lab-detail-eyebrow>تفاصيل المرحلة</p>
+            <h3 data-lab-detail-title>اختر مرحلة لاستعراض تفاصيلها</h3>
+            <p data-lab-detail-desc>اضغط على أي بطاقة لمعرفة الأدوات والمخرجات.</p>
+            <ul data-lab-actions></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="section__title">
+          <p class="eyebrow" data-section-eyebrow="contact"></p>
+          <h2 data-section-title="contact"></h2>
+          <p data-section-desc="contact"></p>
+        </div>
+        <div class="contact__panel">
+          <div class="contact__info" data-contact-info></div>
+          <form class="contact__form" data-contact-form novalidate>
+            <label>
+              <span data-contact-label="name"></span>
+              <input type="text" name="name" required data-contact-placeholder="name" />
+            </label>
+            <label>
+              <span data-contact-label="email"></span>
+              <input type="email" name="email" required data-contact-placeholder="email" />
+            </label>
+            <label>
+              <span data-contact-label="type"></span>
+              <select name="type" required data-contact-select>
+                <option value="" data-contact-option="default"></option>
+                <option value="website" data-contact-option="website"></option>
+                <option value="consulting" data-contact-option="consulting"></option>
+                <option value="workshop" data-contact-option="workshop"></option>
+              </select>
+            </label>
+            <label>
+              <span data-contact-label="message"></span>
+              <textarea name="message" rows="4" data-contact-placeholder="message"></textarea>
+            </label>
+            <button class="button" type="submit" data-contact-submit></button>
+            <p class="contact__feedback" data-contact-note></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong data-footer-name></strong>
+        <p data-footer-role></p>
+      </div>
+      <p data-footer-copy></p>
+    </footer>
+
+    <script type="module" src="scripts/app.js"></script>
+  </body>
+</html>
