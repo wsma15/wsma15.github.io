@@ -1,28 +1,36 @@
-# ملف الأعمال التقنية - Hussein Experience Lab
+Hussein Experience Lab – Interactive Portfolio
+------------------------------------------------
+A modern, fast, and fully interactive single-page portfolio showcasing professional experience, skills, case studies, and project highlights.
 
-واجهة صفحة واحدة تُظهر السيرة الذاتية بشبكة أقسام تفاعلية (البطل، الأثر، الخبرة، المهارات، دراسات الحالة، المختبر، التواصل). لا حاجة لأي عملية بناء؛ يكفي فتح `index.html`.
+FEATURES
+- Light & Dark Themes with persistent state.
+- Arabic & English support with full reload for accurate rendering.
+- Data-driven structure inside data/resume-data.js.
+- Modern animations respecting OS motion settings.
+- Interactive contact form with language-specific responses.
+- Full RTL support and clean typography.
 
-## أبرز المزايا
-- ثيم فاتح مُحسَّن وثيم داكن ثابت مع حفظ الحالة في المتصفح.
-- تبديل فوري بين العربية والإنجليزية (يُعاد تحميل الصفحة لضمان دقة البيانات).
-- بيانات منفصلة بالكامل داخل `data/resume-data.js`، ما يسهّل تحديث الأرقام أو المقاطع دون تغيير الهيكل.
-- حركة حديثة (ميل البطاقات، مؤشرات التقدم، تدوير العبارات في البطل) مع احترام خيار تقليل الحركة في النظام.
-- نموذج تواصل تفاعلي يعرض رسالة مخصّصة للمُرسِل ويستخدم نصوصاً مختلفة لكل لغة.
-- دعم RTL كامل، وخطوط Google (Cairo + Space Grotesk) لضمان مظهر متناسق في الوضعين اللغويين.
+RUNNING LOCALLY
+1. Open the Protofilo folder.
+2. Run index.html directly.
 
-## الاستخدام محلياً
-1. افتح المجلد `Protofilo`.
-2. شغّل `index.html` مباشرة أو عبر خادم بسيط مثل `npx serve` أو إضافة Live Server في VS Code.
+Optional lightweight servers:
+npx serve
+or Live Server in VS Code.
 
-> لا توجد تبعيات npm، لذا يمكن فتح المشروع مباشرة في المتصفح.
+CUSTOMIZING CONTENT
+- All content in data/resume-data.js under ar and en objects.
+- Update hero, stats, experiences, caseStudies, copy.sections, contact.form.
+- Update asset paths when replacing CV or profile image.
 
-## تخصيص السيرة الذاتية
-- جميع النصوص موزعة تحت كائنَيْ اللغة (`ar` و `en`) داخل `data/resume-data.js`.
-- حدّث `hero` للاسم، المسمى الوظيفي، الأزرار، ومسار الصورة/السيرة (`cvUrl`).
-- أضف إنجازات جديدة في `stats` أو `experiences` وأي دراسات حالة داخل `caseStudies`.
-- استخدم مفاتيح `copy.sections` لتغيير العناوين/الوصف لكل قسم، و`contact.form` لتعديل الحقول والترجمات.
+LANGUAGE SWITCHING
+- Stored in localStorage under: proto-lang
+- Language change triggers a full reload.
 
-## ملاحظات إضافية
-- إذا عيّنت ملف سيرة جديداً أو صورة شخصية ضمن `assets` فتأكد من تحديث المسارات في بيانات اللغة العربية والإنجليزية.
-- التبديل اللغوي يعتمد على `localStorage (proto-lang)` ثم يعيد تحميل الصفحة؛ راجع النصوص في كلا القسمين لضمان تطابقهما.
-- يمكن نقل المشروع لاحقاً إلى Vite/React بسهولة لأن البنية الحالية تعتمد على وحدات ES الحديثة وتنظيم واضح للبيانات.
+FUTURE-FRIENDLY DESIGN
+- ES Modules
+- Clean structure
+- Ready for migration to React, Vite, Next.js, etc.
+
+AUTHOR
+Hussein – Software Engineer (ASP.NET, EF, SQL Server, DevExpress, Flutter, PHP)
