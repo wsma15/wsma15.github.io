@@ -36,6 +36,7 @@ export const resumeData = {
         impact: "قيمة العمل",
         experience: "الخبرة",
         skills: "المهارات",
+        certificates: "الشهادات",
         work: "الأعمال",
         lab: "مختبر المنهجية",
         contact: "التواصل",
@@ -60,12 +61,19 @@ export const resumeData = {
           description:
             "غرضي بناء منتجات .NET عالية الموثوقية مع قاعدة بيانات مستدامة وتجربة مستخدم واضحة للفرق التي تتعامل معها يومياً.",
         },
+        certificates: {
+          eyebrow: "الاعتمادات",
+          title: "شهادات عملية",
+          description: "مختارات من الدورات والشهادات التي دعمت عملي في ‎.NET‎ وقواعد البيانات والتواصل التقني.",
+          cta: "عرض الشهادة",
+        },
         work: {
           eyebrow: "دراسات حالة",
           title: "مشاريع تحل مشاكل محددة",
           description:
             "نماذج لأبرز المبادرات التي عملت عليها، من أتمتة التقارير المالية وحتى المنصات التعليمية متعددة الأجهزة.",
           controls: { prev: "المشروع السابق", next: "المشروع التالي" },
+          viewProject: "زيارة المشروع",
         },
         lab: {
           eyebrow: "مختبر المنهجية",
@@ -224,6 +232,43 @@ export const resumeData = {
         "حل المشكلات بشكل استباقي",
       ],
     },
+    certificates: [
+      {
+        title: "Advanced Data Analytics",
+        issuer: "USAID",
+        year: "2025-06",
+        summary: "محتوى متقدم في تحليل البيانات لدعم قرارات المنتجات والمؤشرات التشغيلية.",
+        url: "assets/Advanced%20Data%20Anlytics%20-%20USAID.pdf",
+      },
+      {
+        title: "PostgreSQL",
+        issuer: "Coursera",
+        year: "2024-08",
+        summary: "أساسيات تصميم واستعلام قواعد بيانات PostgreSQL مع أمثلة عملية.",
+        url: "assets/PostgreSQL.pdf",
+      },
+      {
+        title: "HTML & CSS",
+        issuer: "IBM SkillsBuild",
+        year: "2024-08",
+        summary: "مبادئ بناء واجهات الويب، التنسيق، وإعداد صفحات قابلة للوصول.",
+        url: "assets/HTML%20%26%20CSS.pdf",
+      },
+      {
+        title: "CV Writing and Interview",
+        issuer: "USAID",
+        year: "2024-07",
+        summary: "أفضل الممارسات في كتابة السيرة الذاتية والتجهيز للمقابلات التقنية.",
+        url: "assets/CV%20Writing%20And%20Interview.pdf",
+      },
+      {
+        title: "C++ Foundations",
+        issuer: "SoloLearn",
+        year: "2022-12",
+        summary: "مفاهيم أساسية في البرمجة الكائنية باستخدام C++.",
+        url: "assets/C++%20-%20SoloLearn.jpg",
+      },
+    ],
     caseStudies: [
       {
         title: "نظام المحاسبة الداخلي",
@@ -254,6 +299,17 @@ export const resumeData = {
           { label: "دقة التوصيات", value: "35%+" },
           { label: "زيادة التفاعل", value: "40%" },
         ],
+      },
+      {
+        title: "Architectural Cubism",
+        period: "2024",
+        summary: "تجربة ويب تفاعلية تعرض تكوينات معمارية مكعبة مع حركة سلسة وتفاعل فوري.",
+        tags: ["Three.js", "JavaScript", "Creative Coding"],
+        metrics: [
+          { label: "طور كتجربة مباشرة", value: "Live demo" },
+          { label: "واجهات تفاعلية", value: "WebGL" },
+        ],
+        link: "https://wsma15.github.io/ArchitecturalCubism/",
       },
     ],
     lab: [
@@ -349,6 +405,7 @@ export const resumeData = {
         impact: "Impact",
         experience: "Experience",
         skills: "Skills",
+        certificates: "Certifications",
         work: "Case Studies",
         lab: "Process Lab",
         contact: "Contact",
@@ -373,12 +430,19 @@ export const resumeData = {
           description:
             "Modern .NET practices, optimized SQL, and a product mindset to keep stakeholders aligned and confident.",
         },
+        certificates: {
+          eyebrow: "Credentials",
+          title: "Verified learning",
+          description: "Selected courses and certificates that strengthen my .NET, database, and communication work.",
+          cta: "View certificate",
+        },
         work: {
           eyebrow: "Case studies",
           title: "Projects that solved real pain",
           description:
             "Selected work spanning accounting suites, HR tooling, and a cross-platform wellness platform.",
           controls: { prev: "Previous project", next: "Next project" },
+          viewProject: "View project",
         },
         lab: {
           eyebrow: "Process lab",
@@ -528,6 +592,43 @@ export const resumeData = {
         "Proactive problem solving",
       ],
     },
+    certificates: [
+      {
+        title: "Advanced Data Analytics",
+        issuer: "USAID",
+        year: "2025-06",
+        summary: "Advanced analytics curriculum for product decisions and operational KPIs.",
+        url: "assets/Advanced%20Data%20Anlytics%20-%20USAID.pdf",
+      },
+      {
+        title: "PostgreSQL",
+        issuer: "Coursera",
+        year: "2024-08",
+        summary: "Foundations of designing and querying PostgreSQL databases with hands-on labs.",
+        url: "assets/PostgreSQL.pdf",
+      },
+      {
+        title: "HTML & CSS",
+        issuer: "IBM SkillsBuild",
+        year: "2024-08",
+        summary: "Web interface basics covering layout, styling, and accessibility.",
+        url: "assets/HTML%20%26%20CSS.pdf",
+      },
+      {
+        title: "CV Writing and Interview",
+        issuer: "USAID",
+        year: "2024-07",
+        summary: "Practical guidance for crafting resumes and preparing for technical interviews.",
+        url: "assets/CV%20Writing%20And%20Interview.pdf",
+      },
+      {
+        title: "C++ Foundations",
+        issuer: "SoloLearn",
+        year: "2022-12",
+        summary: "Object-oriented programming fundamentals in C++.",
+        url: "assets/C++%20-%20SoloLearn.jpg",
+      },
+    ],
     caseStudies: [
       {
         title: "Mozon Accounting Suite",
@@ -559,6 +660,17 @@ export const resumeData = {
           { label: "Recommendation accuracy", value: "35%+" },
           { label: "User engagement lift", value: "40%" },
         ],
+      },
+      {
+        title: "Architectural Cubism",
+        period: "2024",
+        summary: "Interactive web experience showcasing cubist-inspired architecture with smooth 3D motion.",
+        tags: ["Three.js", "JavaScript", "Creative Coding"],
+        metrics: [
+          { label: "Live showcase", value: "Web demo" },
+          { label: "Rendering", value: "WebGL" },
+        ],
+        link: "https://wsma15.github.io/ArchitecturalCubism/",
       },
     ],
     lab: [

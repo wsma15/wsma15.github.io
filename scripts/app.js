@@ -50,10 +50,12 @@ const init = () => {
   renderStats(activeData.stats);
   renderTimeline(activeData.experiences);
   renderSkills(activeData.skills);
+  renderCertificates(activeData.certificates, activeData.copy?.sections?.certificates);
   renderCaseStudies(activeData.caseStudies, activeData.copy?.sections?.work);
   renderLab(activeData.lab, activeData.copy?.labDetail);
   renderContact(activeData.contact);
   renderFooter(activeData.hero, activeData.copy?.footer);
+  initSplashScreen();
 
   initThemeToggle();
   initLanguageToggle();
@@ -107,6 +109,43 @@ const init = () => {
       });
     });
   };
+
+const initSplashScreen = () => {
+  const splash = $("[data-splash]");
+  if (!splash || !activeData?.hero) return;
+
+  const eyebrow = $("[data-splash-eyebrow]", splash);
+  const nameEl = $("[data-splash-name]", splash);
+  const taglineEl = $("[data-splash-tagline]", splash);
+  const isArabic = currentLang === "ar";
+
+  if (eyebrow) eyebrow.textContent = isArabic ? "ملف الأعمال" : "Portfolio";
+  if (nameEl) nameEl.textContent = activeData.hero.name || "";
+  if (taglineEl) taglineEl.textContent = activeData.hero.brandTagline || activeData.hero.title || "";
+
+  splash.removeAttribute("hidden");
+
+  let dismissed = false;
+  const dismiss = () => {
+    if (dismissed) return;
+    dismissed = true;
+    splash.classList.add("is-fading");
+    setTimeout(() => splash.remove(), 520);
+  };
+
+  requestAnimationFrame(() => {
+    splash.classList.add("is-visible");
+    setTimeout(dismiss, 1400);
+  });
+
+  splash.addEventListener("click", dismiss);
+  splash.addEventListener("transitionend", (ev) => {
+    if (ev.propertyName === "opacity" && splash.classList.contains("is-fading")) {
+      splash.remove();
+    }
+  });
+};
+
 const applyLanguageAttributes = () => {
   const isArabic = currentLang === "ar";
   document.documentElement.lang = isArabic ? "ar" : "en";
@@ -319,9 +358,36 @@ const renderSkills = (skills = {}) => {
   wrap.innerHTML = focusCard + techCard + mindsetCard;
 };
 
+const renderCertificates = (certificates = [], copy = {}) => {
+  const wrap = $("[data-certificates]");
+  if (!wrap) return;
+  const viewLabel = copy?.cta || "View certificate";
+
+  wrap.innerHTML = certificates
+    .map(
+      (cert) => `
+        <article class="certificate-card tilt-card" data-tilt>
+          <div class="certificate-card__meta">
+            <div>
+              <p class="eyebrow">${cert.issuer ?? ""}</p>
+              <h3>${cert.title ?? ""}</h3>
+            </div>
+            ${cert.year ? `<span class="chip">${cert.year}</span>` : ""}
+          </div>
+          ${cert.summary ? `<p>${cert.summary}</p>` : ""}
+          <div class="certificate-card__actions">
+            <a class="button button--ghost" href="${cert.url ?? "#"}" target="_blank" rel="noopener">${viewLabel}</a>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+};
+
 const renderCaseStudies = (caseStudies = [], workCopy = {}) => {
   const track = $("[data-cases-track]");
   if (!track) return;
+  const viewLabel = workCopy?.viewProject || "View project";
   track.innerHTML = caseStudies
     .map(
       (caseStudy) => `
@@ -346,6 +412,17 @@ const renderCaseStudies = (caseStudies = [], workCopy = {}) => {
               )
               .join("")}
           </div>
+          ${
+            caseStudy.link
+              ? `
+                  <div class="case-card__actions">
+                    <a class="button button--ghost" href="${caseStudy.link}" target="_blank" rel="noopener">
+                      ${viewLabel}
+                    </a>
+                  </div>
+                `
+              : ""
+          }
         </article>
       `
     )

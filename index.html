@@ -31,6 +31,14 @@
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
+    <div class="splash" data-splash hidden>
+      <div class="splash__glow" aria-hidden="true"></div>
+      <div class="splash__content">
+        <p class="splash__eyebrow" data-splash-eyebrow></p>
+        <h1 class="splash__name" data-splash-name></h1>
+        <p class="splash__tagline" data-splash-tagline></p>
+      </div>
+    </div>
     <div class="scroll-progress" aria-hidden="true"></div>
 
     <header class="site-header" data-sticky>
@@ -59,6 +67,7 @@
           <a href="#impact" data-nav="impact"></a>
           <a href="#experience" data-nav="experience"></a>
           <a href="#skills" data-nav="skills"></a>
+          <a href="#certificates" data-nav="certificates"></a>
           <a href="#work" data-nav="work"></a>
           <a href="#lab" data-nav="lab"></a>
           <a href="#contact" data-nav="contact"></a>
@@ -179,6 +188,15 @@
           <p data-section-desc="skills"></p>
         </div>
         <div class="skills" data-skills></div>
+      </section>
+
+      <section class="section section--alt" id="certificates">
+        <div class="section__title">
+          <p class="eyebrow" data-section-eyebrow="certificates"></p>
+          <h2 data-section-title="certificates"></h2>
+          <p data-section-desc="certificates"></p>
+        </div>
+        <div class="certificates" data-certificates></div>
       </section>
 
       <section class="section section--alt" id="work">
