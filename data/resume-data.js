@@ -89,9 +89,9 @@ export const resumeData = {
   stats: [
     {
       label: "سنوات الخبرة",
-      dynamic: { type: "experienceYears", since: 2017 },
+      value: 2,
       suffix: "+",
-      description: "تطوير حلول برمجية منذ عام 2017 مع تنوع في الأنظمة المالية والتعليمية.",
+      description: "سنتان من تطوير حلول .NET موثقة في السيرة الذاتية بين مشاريع الجامعة ومنظومات موزون الحالية.",
     },
     {
       label: "تقليل وقت تجهيز القيود",
@@ -105,18 +105,18 @@ export const resumeData = {
         suffix: "%",
         description: "دمج تقارير Crystal Reports منح الفريق القدرة على توليد القوائم المالية فورياً.",
       },
-      {
-        label: "تحسين استجابة HR",
-        value: 25,
-        suffix: "%",
-        description: "الشاشة الجديدة للهيكل التنظيمي جعلت فرق HR تصل إلى بيانات الموظفين والقطاعات أسرع.",
-      },
-      {
-        label: "تسريع موافقات التدريب",
-        value: 40,
-        suffix: "%",
-        description: "بوابة التدريب العملي المؤمنة بـ ASP.NET MVC تختزل زمن المراجعة من أسابيع إلى أيام.",
-      },
+    {
+      label: "رفع كفاءة البحث عن الموظفين",
+      value: 30,
+      suffix: "%",
+      description: "مُولِّد الهيكل التنظيمي التفاعلي مكّن فريق HR من الوصول إلى بيانات الموظفين والقطاعات بسرعة أعلى بنسبة 30٪.",
+    },
+    {
+      label: "تسريع دورة مراجعة التدريب",
+      value: 40,
+      suffix: "%",
+      description: "بوابة التدريب العملي المؤمنة بـ ASP.NET MVC تقلّص فترة مراجعة واعتماد التقارير من أسابيع إلى أيام.",
+    },
     ],
     experiences: [
       {
@@ -402,9 +402,9 @@ export const resumeData = {
   stats: [
     {
       label: "Years of hands-on experience",
-      dynamic: { type: "experienceYears", since: 2017 },
+      value: 2,
       suffix: "+",
-      description: "Building .NET systems since 2017 across finance, HR, and education products.",
+      description: "Two years of shipping .NET systems across finance, HR, and education products.",
     },
     {
       label: "Manual journal prep saved",
@@ -418,18 +418,18 @@ export const resumeData = {
         suffix: "%",
         description: "Crystal Reports templating delivers ready-to-export statements instantly.",
       },
-      {
-        label: "HR lookup speed gain",
-        value: 25,
-        suffix: "%",
-        description: "A new org-chart screen gives HR instant access to divisions and sectors.",
-      },
-      {
-        label: "Internship approvals faster",
-        value: 40,
-        suffix: "%",
-        description: "The MVC internship portal automates supervisor approvals and status tracking.",
-      },
+    {
+      label: "HR lookup efficiency gain",
+      value: 30,
+      suffix: "%",
+      description: "The dynamic org-chart builder lets HR locate people and divisions 30% faster.",
+    },
+    {
+      label: "Internship review cycle faster",
+      value: 40,
+      suffix: "%",
+      description: "Role-based workflows in the MVC internship portal shorten the report-review cycle from weeks to days.",
+    },
     ],
     experiences: [
       {

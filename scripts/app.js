@@ -643,22 +643,46 @@ const initActiveNav = () => {
   const navLinks = $$(".site-header__nav a");
   if (!sections.length || !navLinks.length) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => link.classList.remove("is-active"));
-          const activeLink = navLinks.find(
-            (link) => link.getAttribute("href") === `#${entry.target.id}`
-          );
-          if (activeLink) activeLink.classList.add("is-active");
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
+  const setActiveLink = (hash) => {
+    navLinks.forEach((link) => link.classList.toggle("is-active", link.getAttribute("href") === hash));
+  };
 
-  sections.forEach((section) => observer.observe(section));
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => setActiveLink(link.getAttribute("href")));
+  });
+
+  let ticking = false;
+  const header = document.querySelector(".site-header");
+  const getScrollFocus = () => window.scrollY + window.innerHeight * 0.35;
+
+  const updateFromScroll = () => {
+    ticking = false;
+    const focusLine = getScrollFocus();
+    const headerOffset = header ? header.offsetHeight : 0;
+    let currentSection = sections[0];
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - headerOffset * 0.5;
+      if (focusLine >= sectionTop) {
+        currentSection = section;
+      }
+    });
+
+    if (currentSection) {
+      setActiveLink(`#${currentSection.id}`);
+    }
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateFromScroll);
+    }
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", updateFromScroll);
+  updateFromScroll();
 };
 
 const initHeroWordCycler = () => {
