@@ -1,8 +1,8 @@
 export const resumeData = {
   ar: {
-    pageTitle: "حسين العويسي | مهندس برمجيات .NET",
+    pageTitle: "حسين الويسي | مهندس برمجيات .NET",
     hero: {
-      name: "حسين العويسي",
+      name: "حسين الويسي",
       brandMark: "ح",
       brandTagline: "مهندس برمجيات .NET",
       footerRole: "مهندس برمجيات .NET",
@@ -14,7 +14,7 @@ export const resumeData = {
       cvUrl: "assets/Hussein Alwisi Resume.pdf",
       ctas: { primary: "تنزيل السيرة الذاتية", secondary: "لنبدأ الحديث" },
       photo: "assets/Me.jpeg",
-      photoAlt: "صورة حسين العويسي",
+      photoAlt: "صورة حسين الويسي",
       chips: [
         "C# / VB.NET",
         "WinForms & DevExpress",
