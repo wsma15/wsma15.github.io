@@ -166,10 +166,18 @@ const updateDocumentTitle = () => {
 
 const renderBrand = (hero = {}) => {
   const name = $("[data-brand-name]");
-  if (name) name.textContent = hero.name || "";
+  if (name) {
+    name.textContent = hero.name || "";
+    name.lang = currentLang;
+    name.dir = currentLang === "ar" ? "rtl" : "ltr";
+  }
 
   const tagline = $("[data-brand-tagline]");
-  if (tagline) tagline.textContent = hero.brandTagline || hero.title || "";
+  if (tagline) {
+    tagline.textContent = hero.brandTagline || hero.title || "";
+    tagline.lang = currentLang;
+    tagline.dir = currentLang === "ar" ? "rtl" : "ltr";
+  }
 };
 
 const renderNav = (copy = {}) => {
@@ -477,6 +485,7 @@ const renderContact = (contact = {}) => {
   const info = $("[data-contact-info]");
   if (info) {
     const segments = [];
+    const phoneDisplay = contact.phoneLabel || (currentLang === "ar" ? "اتصال" : "Call");
     segments.push(`
       <div>
         <span class="meta-label">${contact.labels?.email ?? ""}</span>
@@ -486,16 +495,17 @@ const renderContact = (contact = {}) => {
     segments.push(`
       <div>
         <span class="meta-label">${contact.labels?.phone ?? ""}</span>
-        <p><a href="tel:${contact.phone}">${contact.phone ?? ""}</a></p>
+        <p><a href="tel:${contact.phone}">${phoneDisplay}</a></p>
       </div>
     `);
     if (contact.whatsapp) {
       const digits = contact.whatsapp.replace(/\D/g, "");
       const whatsappHref = digits ? `https://wa.me/${digits}` : `https://wa.me/${encodeURIComponent(contact.whatsapp)}`;
+      const whatsappText = contact.whatsappLabel || contact.labels?.whatsapp || "WhatsApp";
       segments.push(`
         <div>
           <span class="meta-label">${contact.labels?.whatsapp ?? "WhatsApp"}</span>
-          <p><a href="${whatsappHref}" target="_blank" rel="noopener">${contact.whatsapp}</a></p>
+          <p><a href="${whatsappHref}" target="_blank" rel="noopener">${whatsappText}</a></p>
         </div>
       `);
     }
@@ -806,14 +816,35 @@ const initContactForm = () => {
 };
 
 const initSmoothScroll = () => {
-  const links = $$("[data-scroll-to]");
-  links.forEach((link) => {
+  const header = document.querySelector(".site-header");
+  const offset = () => (header ? header.offsetHeight + 16 : 16);
+
+  const smoothScrollTo = (target) => {
+    if (!target) return;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset();
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  // buttons with data-scroll-to
+  $$("[data-scroll-to]").forEach((link) => {
     link.addEventListener("click", (event) => {
-      const targetId = link.dataset.scrollTo;
-      const target = document.querySelector(targetId);
+      const target = document.querySelector(link.dataset.scrollTo);
       if (target) {
         event.preventDefault();
-        target.scrollIntoView({ behavior: "smooth" });
+        smoothScrollTo(target);
+      }
+    });
+  });
+
+  // nav anchors and any in-page hash links
+  $$('a[href^="#"]').forEach((link) => {
+    const hash = link.getAttribute("href");
+    if (!hash || hash === "#") return;
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector(hash);
+      if (target) {
+        event.preventDefault();
+        smoothScrollTo(target);
       }
     });
   });

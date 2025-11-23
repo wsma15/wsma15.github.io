@@ -45,6 +45,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem; /* keep anchored sections visible below the fixed header */
 }
 
 body {
@@ -75,6 +76,11 @@ body.lang-en {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ensure in-page anchors aren't hidden under the sticky header */
+main section[id] {
+  scroll-margin-top: clamp(5.5rem, 10vw, 7rem);
 }
 
 .section.is-visible,
@@ -248,25 +254,32 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
   min-width: 0;
+  flex-shrink: 0;
 }
 
 .site-header__brand-text {
   display: inline-flex;
   flex-direction: column;
-  gap: 0.05rem;
-  line-height: 1.05;
+  gap: 0.12rem;
+  line-height: 1.18;
   font-weight: 600;
   white-space: nowrap;
   text-align: left;
-  min-width: 0;
+  min-width: max-content;
 }
 
 .site-header__brand-text span {
   color: var(--text-muted);
   font-weight: 500;
   font-size: 0.9rem;
+}
+
+.site-header__brand-text strong,
+.site-header__brand-text span {
+  letter-spacing: 0;
+  unicode-bidi: plaintext;
 }
 
 .lang-rtl .site-header__brand-text {
@@ -277,6 +290,7 @@ a {
 .lang-rtl .site-header__brand {
   flex-direction: row-reverse;
   justify-content: flex-start;
+  flex-shrink: 0;
 }
 
 .brand-mark {
@@ -692,7 +706,7 @@ main {
 
 .hero__content h1 {
   font-size: clamp(2.4rem, 5vw, 3.5rem);
-  line-height: 1.2;
+  line-height: 1.25;
   margin: 0;
   font-weight: 700;
 }
