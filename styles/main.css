@@ -644,6 +644,17 @@ a {
   box-shadow: none;
 }
 
+.button--talk {
+  background: #16a34a;
+  color: #06250f;
+  border-color: #0f8c3e;
+  box-shadow: 0 12px 35px rgba(22, 163, 74, 0.35);
+}
+
+.button--talk:hover {
+  box-shadow: 0 15px 45px rgba(22, 163, 74, 0.45);
+}
+
 main {
   padding-inline: clamp(1.2rem, 4vw, 4rem);
   padding-block: 3rem 4rem;
