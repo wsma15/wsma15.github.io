@@ -482,86 +482,52 @@ const updateLabDetail = (index = 0) => {
 };
 
 const renderContact = (contact = {}) => {
-  const info = $("[data-contact-info]");
+  const info = document.querySelector("[data-contact-info]");
   if (info) {
-    const segments = [];
-    const phoneDisplay = contact.phoneLabel || (currentLang === "ar" ? "اتصال" : "Call");
-    segments.push(`
-      <div>
-        <span class="meta-label">${contact.labels?.email ?? ""}</span>
-        <p><a href="mailto:${contact.email}">${contact.email ?? ""}</a></p>
+    const phoneDisplay = contact.phoneLabel || contact.phone || (currentLang === "ar" ? "اتصال" : "Call");
+    const waText = encodeURIComponent(contact.whatsappMessage || "");
+    const whatsappHref = contact.whatsapp
+      ? (() => {
+          const digits = contact.whatsapp.replace(/\D/g, "");
+          return digits
+            ? `https://wa.me/${digits}${waText ? `?text=${waText}` : ""}`
+            : `https://wa.me/${encodeURIComponent(contact.whatsapp)}${waText ? `?text=${waText}` : ""}`;
+        })()
+      : "";
+    const whatsappText = contact.whatsappLabel || contact.labels?.whatsapp || "WhatsApp";
+    const items = [
+      { label: contact.labels?.email ?? "", value: `<a href="mailto:${contact.email}">${contact.email ?? ""}</a>` },
+      { label: contact.labels?.phone ?? "", value: `<a href="tel:${contact.phone}">${phoneDisplay}</a>` },
+      contact.whatsapp
+        ? {
+            label: contact.labels?.whatsapp ?? "WhatsApp",
+            value: `<a href="${whatsappHref}" target="_blank" rel="noopener">${whatsappText}</a>`,
+          }
+        : null,
+      { label: contact.labels?.city ?? "", value: contact.city ?? "" },
+      {
+        label: contact.labels?.socials ?? "",
+        value: (contact.socials || [])
+          .map((social) => `<a href="${social.url}" target="_blank" rel="noopener">${social.label}</a>`)
+          .join(" · "),
+      },
+    ].filter(Boolean);
+    info.innerHTML = `
+      <div class="contact__grid">
+        ${items
+          .map(
+            (item) => `
+              <div class="contact__item">
+                <span class="meta-label">${item.label}</span>
+                <p>${item.value}</p>
+              </div>
+            `
+          )
+          .join("")}
       </div>
-    `);
-    segments.push(`
-      <div>
-        <span class="meta-label">${contact.labels?.phone ?? ""}</span>
-        <p><a href="tel:${contact.phone}">${phoneDisplay}</a></p>
-      </div>
-    `);
-    if (contact.whatsapp) {
-      const digits = contact.whatsapp.replace(/\D/g, "");
-      const whatsappHref = digits ? `https://wa.me/${digits}` : `https://wa.me/${encodeURIComponent(contact.whatsapp)}`;
-      const whatsappText = contact.whatsappLabel || contact.labels?.whatsapp || "WhatsApp";
-      segments.push(`
-        <div>
-          <span class="meta-label">${contact.labels?.whatsapp ?? "WhatsApp"}</span>
-          <p><a href="${whatsappHref}" target="_blank" rel="noopener">${whatsappText}</a></p>
-        </div>
-      `);
-    }
-    segments.push(`
-      <div>
-        <span class="meta-label">${contact.labels?.city ?? ""}</span>
-        <p>${contact.city ?? ""}</p>
-      </div>
-    `);
-    segments.push(`
-      <div>
-        <span class="meta-label">${contact.labels?.socials ?? ""}</span>
-        <p>
-          ${(contact.socials || [])
-            .map((social) => `<a href="${social.url}" target="_blank" rel="noopener">${social.label}</a>`)
-            .join(" • ")}
-        </p>
-      </div>
-    `);
-
-    info.innerHTML = segments.join("");
+    `;
   }
-
-  const form = $("[data-contact-form]");
-  if (!form) return;
-
-  $$("[data-contact-label]", form).forEach((label) => {
-    const key = label.dataset.contactLabel;
-    if (contact.form?.labels?.[key]) {
-      label.textContent = contact.form.labels[key];
-    }
-  });
-
-  $$("[data-contact-placeholder]", form).forEach((field) => {
-    const key = field.dataset.contactPlaceholder;
-    if (contact.form?.placeholders?.[key]) {
-      field.placeholder = contact.form.placeholders[key];
-    }
-  });
-
-  $$("[data-contact-option]", form).forEach((option) => {
-    const key = option.dataset.contactOption;
-    if (contact.form?.options?.[key]) {
-      option.textContent = contact.form.options[key];
-    }
-  });
-
-  const submitBtn = $("[data-contact-submit]", form);
-  if (submitBtn) submitBtn.textContent = contact.form?.button || "";
-
-  const note = $("[data-contact-note]");
-  if (note) note.textContent = contact.form?.note || "";
-
-  contactSuccessTemplate = contact.form?.success || "";
 };
-
 const renderFooter = (hero = {}, footerCopy = {}) => {
   const nameEl = $("[data-footer-name]");
   if (nameEl) nameEl.textContent = hero.name || "";

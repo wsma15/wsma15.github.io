@@ -11,7 +11,7 @@ export const resumeData = {
       availability: "متاح لفرص .NET بدوام كامل",
       metaLabels: { location: "الموقع", availability: "التوفر" },
       bio: "مهندس برمجيات دقيق يبني تطبيقات سطح مكتب وويب آمنة وقابلة للتوسع ضمن منظومة Microsoft .NET مع تركيز على الأنظمة المالية وأدوات الموارد البشرية وأتمتة تقارير Crystal Reports.",
-      cvUrl: "assets/Hussein Alwisi Resume.pdf",
+      cvUrl: "assets/HussinAlwisiResume.pdf",
       ctas: { primary: "تنزيل السيرة الذاتية", secondary: "لنبدأ الحديث" },
       photo: "assets/Me.jpeg",
       photoAlt: "صورة حسين الويسي",
@@ -128,75 +128,76 @@ export const resumeData = {
     ],
     experiences: [
       {
-        title: "مطور مبتدئ",
+        title: "Medu (Mozon Education) - ????? ???????? ???? ?????",
         company: "Mozon Technology",
-        period: "يوليو 2024 – الآن | عمّان",
+        period: "????? 2025 - ?????? 2025",
         description:
-          "أطوّر وحدات محاسبة وموارد بشرية باستخدام C#, WinForms, SQL Server وCrystal Reports مع مسؤولية الأداء وموثوقية البيانات.",
+          "????? ????? Windows Forms ????? Medu ?????? ????? ???????? ??????? ????????.",
         highlights: [
-          "تصميم وحدات أنواع القيود وأنواع الحسابات مع دليل حسابات ديناميكي.",
-          "أتمتة Crystal Reports لتقليل وقت تجهيز التقارير بحوالي 30٪.",
-          "تحسين الاستعلامات الثقيلة ورفع سرعة اللوحات الرئيسية بنسبة 20٪.",
+          "???? ???? ?????? ??? ???? ????? ????????? ???????? ?????? ?????? ?????? ???????.",
+          "????? ??????? ??? ??? ??????? ?? ????? ??????? ??????? ??????? ???????? ?????? ???? ??????? ????????.",
+          "????? ????? ??? ????? ?????????? ?????? ??????/???????? ?? ???? ?????? ??? ????? ???????.",
         ],
         stack: ["C#", "WinForms", "SQL Server", "Crystal Reports"],
       },
       {
-        title: "منشئ الهيكل التنظيمي للموارد البشرية",
+        title: "???? ???????? - ASP.NET Windows Forms",
         company: "Mozon Technology",
-        period: "2024 | عمّان",
+        period: "ديسمبر 2024 - مايو 2025",
         description:
-          "سلّمت شاشة WebForms تعرض الهيكل التنظيمي مباشرة من بيانات الموظفين والأقسام والقطاعات الموجودة.",
+          "????? ???? ????? ???????? ?????? ???? ???????? ?? ?????? ??????.",
         highlights: [
-          "سحب بيانات الموارد البشرية الحية لإنشاء مخطط تفاعلي محدث دائماً.",
-          "تمكين فرق HR من تعديل الهيكل دون الحاجة للدعم التقني.",
-          "تطبيق صلاحيات المستخدم بحيث يرى كل مدير نطاقه فقط.",
+          "????? ????? ????? ???????? ???? ???????? ????? ????????? ????? ?????? ????????.",
+          "??? ????? ?????? ????? 35% ??? ????? ??????? ?????? ????? ????????.",
+          "??? SAP Crystal Reports ?????? ????? ???????? 30% ?????? ????????? SQL ????? 20% ?? ?????.",
+        ],
+        stack: ["C#", "WinForms", "SQL Server", "Crystal Reports"],
+      },
+      {
+        title: "????? ASP.NET WebForms - ?????",
+        company: "Mozon Technology",
+        period: "?????? - ?????? 2024",
+        description:
+          "????? ????? ??????? ??????? ?????? ????? ???????? ???? ???? ???????.",
+        highlights: [
+          "????? ?????? HR ???? ????????? ????? 25%.",
+          "????? ???? ???? ?????? ???????? ??? ???? ????? 30%.",
+          "????? ?????? ??????? ?????? ??????? ????? 15%.",
         ],
         stack: ["ASP.NET WebForms", "ADO.NET", "SQL Server"],
       },
       {
-        title: "وحدة مرفقات إدارة المدارس",
-        company: "Mozon Technology",
-        period: "2024 | عمّان",
+        title: "????? ASP.NET MVC - ????? ?????",
+        company: "Al-Hussein Bin Talal University",
+        period: "????? - ????? 2024",
         description:
-          "وسّعت المنصة المدرسية بمركز مرفقات موحد مرتبط بكل كيان مع سياسات تخزين واضحة.",
+          "????? MVC ?????? ?????? ????? ?????? ????????? ????????.",
         highlights: [
-          "شاشة تعريف لأنواع الملفات والحدود والتصنيفات.",
-          "واجهة رفع ومراجعة تربط كل ملف بسجله مع وصول دقيق.",
-          "تحسين تخزين SQL للتعامل مع ملفات أكبر بثقة.",
-        ],
-        stack: ["C#", "WinForms", "DevExpress", "SQL Server"],
-      },
-      {
-        title: "بوابة إدارة التدريب",
-        company: "ASP.NET MVC Project",
-        period: "2024",
-        description: "بوابة MVC آمنة للطلاب والمشرفين والإداريين لإدارة مراحل التدريب.",
-        highlights: [
-          "تقليل دورات المراجعة 40٪ عبر المصادقة ومسارات العمل حسب الدور.",
-          "زيادة كفاءة المشرفين 20٪ عبر تحكم ديناميكي في الصلاحيات.",
+          "??? ??? ?????? ???????? 40% ???????? ?????? ???? ????? Entity Framework ?????.",
+          "????? ??????? ??? ????? ???? ????? ??????? ????? 20%.",
         ],
         stack: ["ASP.NET MVC", "Entity Framework", "SQL Server"],
       },
       {
-        title: "منصة PureActive — مشروع التخرج",
+        title: "???? ????? ??????? ???????? ????????",
         company: "Al-Hussein Bin Talal University",
-        period: "فبراير – يونيو 2024",
+        period: "?????? 2024 - ????? 2024",
         description:
-          "تطبيق لياقة وتغذية متعدد المنصات يجمع خطط وجبات مخصصة مع مزامنة تمارين مباشرة عبر Firebase.",
+          "????? ???? ????? ?????? ?????? ??????? (PureActive).",
         highlights: [
-          "خطط وجبات تعتمد مؤشر وحِمل جلايسيمي لرفع دقة التوصيات 35٪+.",
-          "خطط تمرين مخصصة زادت التفاعل 40٪.",
-          "مزامنة لحظية بين المدربين والأعضاء باستخدام Firebase.",
+          "????? ??? ?????? ????? ???????? ????/??? ??? ???? ???? ??? ???????? 35%.",
+          "????? ???????? ?? ????? ????? ?????? ????? ???? ??????? ???? 40%.",
+          "???? ?????? ????? ?? Firebase ??????? ???? ??? ???????.",
         ],
         stack: ["Flutter", "Dart", "Firebase", "SQLite"],
       },
       {
-        title: "بكالوريوس هندسة البرمجيات",
+        title: "????????? ????? ?????????",
         company: "Al-Hussein Bin Talal University",
-        period: "2021 – 2024 | معدل 74.36%",
-        description: "درجة هندسة برمجيات تركز على أنظمة المؤسسات وتصميم قواعد البيانات والمشاريع الجماعية.",
-        highlights: ["أبحاث في ERP وتحليل الأنظمة.", "المشاركة في مسابقات ومنتجات طلابية."],
-        stack: ["هندسة برمجيات", "تحليل نظم", "قواعد بيانات"],
+        period: "?????? 2021 - ?????? 2024 | ???? 74.36%",
+        description: "???? ????? ????????? ?????? ??? ??????? ???????? ?????? ????? ???????? ?????? ???????.",
+        highlights: ["?????? ????? ??? ?ERP.", "???????? ?? ??????? ??????? ??????."],
+        stack: ["????? ???????", "????? ???", "????? ??????"],
       },
     ],
     skills: {
@@ -261,8 +262,8 @@ export const resumeData = {
     ],
     caseStudies: [
       {
-        title: "جناح موزون المحاسبي",
-        period: "2024",
+        title: "موزون المحاسبي",
+        period: "2025",
         summary: "جناح سطح مكتب يدير أنواع القيود والحسابات ويؤتمت القوائم المالية.",
         tags: ["WinForms", "SQL Server", "Crystal Reports"],
         metrics: [
@@ -292,7 +293,7 @@ export const resumeData = {
       },
       {
         title: "Architectural Cubism",
-        period: "2024",
+        period: "2025",
         summary: "تجربة ويب تفاعلية تُظهر عمارة مستوحاة من التكعيبية بحركة سلسة.",
         tags: ["Three.js", "JavaScript", "Creative Coding"],
         metrics: [
@@ -329,10 +330,12 @@ export const resumeData = {
       email: "hussein.alwisi@outlook.com",
       phone: "+962 790119021",
       whatsapp: "+962 790119021",
+      whatsappMessage: "مرحباً حسين، أود مناقشة مشروع .NET بخصوص ...",
       city: "إربد – متاح للعمل عن بُعد، هجين، أو حضوري",
       socials: [
         { label: "GitHub", url: "https://github.com/wsma15" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/hussein-alwisi/" },
+        { label: "Facebook", url: "https://web.facebook.com/0wsma15" },
       ],
       form: {
         labels: { name: "الاسم الكامل", email: "البريد الإلكتروني", type: "نوع المشروع", message: "ملخص المشروع" },
@@ -365,7 +368,7 @@ export const resumeData = {
       availability: "Open to full-time .NET opportunities",
       metaLabels: { location: "Location", availability: "Availability" },
       bio: "Detail-oriented software engineer building secure and scalable desktop/web apps in the Microsoft .NET ecosystem with a focus on financial systems, HR tooling, and Crystal Reports automation.",
-      cvUrl: "assets/Hussein Alwisi Resume.pdf",
+      cvUrl: "assets/HussinAlwisiResume.pdf",
       ctas: { primary: "Download Resume", secondary: "Let's talk" },
       photo: "assets/Me.jpeg",
       photoAlt: "Hussein Alwisi portrait",
@@ -482,75 +485,71 @@ export const resumeData = {
     ],
     experiences: [
       {
-        title: "Junior Developer",
+        title: "Medu (Mozon Education) - Attachments & Workflow",
         company: "Mozon Technology",
-        period: "Jul 2024 — Present | Amman",
+        period: "Jul 2025 - Dec 2025",
         description:
-          "Building accounting and HR modules with C#, WinForms, SQL Server, and Crystal Reports while owning performance and data reliability.",
+          "Led ASP.NET Windows Forms delivery for Medu's attachment management and approval workflows.",
         highlights: [
-          "Designed Journal/Account type modules with a dynamic chart of accounts.",
-          "Automated Crystal Reports to cut report prep time by ~30%.",
-          "Optimized heavy SQL queries and lifted key dashboards by 20% faster loads.",
+          "Built secure attachment management with upload, preview, download, and delete for student/system documents.",
+          "Implemented document-type permissions, refined the UI, addressed test issues, and shipped activation + development guides.",
+          "Delivered workflow types, approvals, and My Requests / My Approvals screens with a flexible multi-step approval engine.",
         ],
         stack: ["C#", "WinForms", "SQL Server", "Crystal Reports"],
       },
       {
-        title: "HR Organizational Chart builder",
+        title: "Accounting System - ASP.NET Windows Forms",
         company: "Mozon Technology",
-        period: "2024 | Amman",
-        description:
-          "Delivered a WebForms screen that renders the org structure straight from existing employee, department, and sector data.",
+        period: "Dec 2024 - May 2025",
+        description: "Owned accounting modules and reporting performance improvements.",
         highlights: [
-          "Pulled live HR data to generate an always-up-to-date interactive chart.",
-          "Enabled HR teams to edit the structure without engineering assistance.",
-          "Respected user permissions so each manager only sees their scope.",
+          "Delivered journal types, journal entries, account types, and a dynamic chart of accounts.",
+          "Cut manual processing by 35% through optimized forms and database integration.",
+          "Integrated SAP Crystal Reports (30% faster prep) and tuned SQL for ~20% quicker retrieval.",
+        ],
+        stack: ["C#", "WinForms", "SQL Server", "Crystal Reports"],
+      },
+      {
+        title: "ASP.NET WebForms Development - Internship",
+        company: "Mozon Technology",
+        period: "Sep - Nov 2024",
+        description: "Refreshed HR WebForms screens and data structures during internship.",
+        highlights: [
+          "Modernized HR UI to improve responsiveness by 25%.",
+          "Built a dynamic organizational chart that increased lookup efficiency by 30%.",
+          "Improved backend structure, reducing data redundancy by 15%.",
         ],
         stack: ["ASP.NET WebForms", "ADO.NET", "SQL Server"],
       },
       {
-        title: "School Management Attachments module",
-        company: "Mozon Technology",
-        period: "2024 | Amman",
-        description:
-          "Extended the school platform with a unified attachments center tied to every entity with storage policies.",
+        title: "ASP.NET MVC Development - University Internship",
+        company: "Al-Hussein Bin Talal University",
+        period: "Jul - Aug 2024",
+        description: "MVC portal for managing university internship workflows and supervisor approvals.",
         highlights: [
-          "Definition screen for file types, size limits, and categories.",
-          "Upload/review UI that links each file to its record with granular access.",
-          "Optimized SQL storage to handle larger uploads confidently.",
-        ],
-        stack: ["C#", "WinForms", "DevExpress", "SQL Server"],
-      },
-      {
-        title: "Internship Management Portal",
-        company: "ASP.NET MVC Project",
-        period: "2024",
-        description:
-          "Secure MVC portal for students, supervisors, and administrators to manage internship milestones.",
-        highlights: [
-          "Reduced review cycles by 40% through authentication and role-based workflows.",
-          "Boosted admin efficiency by 20% with dynamic access control.",
+          "Reduced report processing time by 40% using secure authentication and clean Entity Framework architecture.",
+          "Implemented dynamic role-based access that improved administrative efficiency by 20%.",
         ],
         stack: ["ASP.NET MVC", "Entity Framework", "SQL Server"],
       },
       {
-        title: "PureActive — Graduation Project",
+        title: "Advanced Fitness & Nutrition Management Software",
         company: "Al-Hussein Bin Talal University",
-        period: "Feb — Jun 2024",
-        description:
-          "Cross-platform fitness and nutrition app combining personalized meal plans with live training sync via Firebase.",
+        period: "Feb - Jun 2024",
+        description: "Graduation project delivering a cross-platform fitness and nutrition experience (PureActive).",
         highlights: [
-          "Meal plans powered by glycemic index/load for +35% recommendation accuracy.",
-          "Custom workout routines increased engagement by 40%.",
-          "Real-time sync between trainers and members using Firebase.",
+          "Built personalized meal planning with glycemic index/load to improve recommendation accuracy by 35%.",
+          "Enabled trainers to create custom workout routines, lifting engagement by ~40%.",
+          "Engineered real-time sync with Firebase for seamless cross-platform data.",
         ],
         stack: ["Flutter", "Dart", "Firebase", "SQLite"],
       },
       {
         title: "B.Sc. Software Engineering",
         company: "Al-Hussein Bin Talal University",
-        period: "2021 — 2024 | GPA 74.36%",
-        description: "Software Engineering degree focused on enterprise systems, database design, and team projects.",
-        highlights: ["ERP and systems analysis research work.", "Participation in student product competitions."],
+        period: "Feb 2021 - Sep 2024 | GPA 74.36%",
+        description: "Software Engineering degree with emphasis on enterprise systems, database design, and team delivery.",
+        highlights: ["ERP and systems analysis coursework.", "Participation in student product competitions."],
         stack: ["Software Engineering", "Systems Analysis", "Databases"],
       },
     ],
@@ -616,8 +615,8 @@ export const resumeData = {
     ],
     caseStudies: [
       {
-        title: "Mozon Accounting Suite",
-        period: "2024",
+        title: "Mozon Accounting",
+        period: "2025",
         summary: "Desktop suite that manages journal types, accounts, and automated financial statements.",
         tags: ["WinForms", "SQL Server", "Crystal Reports"],
         metrics: [
@@ -648,7 +647,7 @@ export const resumeData = {
       },
       {
         title: "Architectural Cubism",
-        period: "2024",
+        period: "2025",
         summary: "Interactive web experience showcasing cubist-inspired architecture with smooth 3D motion.",
         tags: ["Three.js", "JavaScript", "Creative Coding"],
         metrics: [
@@ -685,10 +684,12 @@ export const resumeData = {
       email: "hussein.alwisi@outlook.com",
       phone: "+962 790119021",
       whatsapp: "+962 790119021",
+      whatsappMessage: "Hi Hussein, I'd like to discuss a .NET project about ...",
       city: "Irbid, Jordan — Remote, hybrid, or onsite",
       socials: [
         { label: "GitHub", url: "https://github.com/wsma15" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/hussein-alwisi/" },
+        { label: "Facebook", url: "https://web.facebook.com/0wsma15" },
       ],
       form: {
         labels: { name: "Full name", email: "Email", type: "Project type", message: "Project summary" },

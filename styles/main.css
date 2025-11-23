@@ -645,14 +645,14 @@ a {
 }
 
 .button--talk {
-  background: #16a34a;
-  color: #06250f;
-  border-color: #0f8c3e;
-  box-shadow: 0 12px 35px rgba(22, 163, 74, 0.35);
+  background-image: var(--accent-grad);
+  color: #0b0516;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .button--talk:hover {
-  box-shadow: 0 15px 45px rgba(22, 163, 74, 0.45);
+  box-shadow: 0 15px 45px rgba(124, 77, 255, 0.35);
 }
 
 main {
@@ -1271,18 +1271,49 @@ main {
 
 .contact__panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  justify-items: center;
+  grid-template-columns: 1fr;
   gap: 1.2rem;
 }
 
 .contact__info {
   border-radius: var(--radius-md);
-  padding: 1.5rem;
+  padding: 2rem;
   background: var(--surface-alt);
   border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 1100px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.4rem;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem 1.6rem;
+}
+
+@media (min-width: 900px) {
+  .contact__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.contact__item {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.contact__item p {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .contact__info a {
