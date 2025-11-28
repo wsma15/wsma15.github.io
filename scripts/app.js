@@ -1,4 +1,4 @@
-import { resumeData } from "../data/resume-data.js";
+﻿import { resumeData } from "../data/resume-data.js";
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
@@ -119,7 +119,7 @@ const initSplashScreen = () => {
   const taglineEl = $("[data-splash-tagline]", splash);
   const isArabic = currentLang === "ar";
 
-  if (eyebrow) eyebrow.textContent = isArabic ? "ملف الأعمال" : "Portfolio";
+  if (eyebrow) eyebrow.textContent = isArabic ? "ملف أعمال" : "Portfolio";
   if (nameEl) nameEl.textContent = activeData.hero.name || "";
   if (taglineEl) taglineEl.textContent = activeData.hero.brandTagline || activeData.hero.title || "";
 
@@ -181,6 +181,10 @@ const renderBrand = (hero = {}) => {
 };
 
 const renderNav = (copy = {}) => {
+  const nav = $(".site-header__nav");
+  if (nav && copy.ariaLabel) {
+    nav.setAttribute("aria-label", copy.ariaLabel);
+  }
   const navLinks = $$(".site-header__nav a[data-nav]");
   navLinks.forEach((link) => {
     const key = link.dataset.nav;
@@ -383,9 +387,13 @@ const renderCertificates = (certificates = [], copy = {}) => {
             ${cert.year ? `<span class="chip">${cert.year}</span>` : ""}
           </div>
           ${cert.summary ? `<p>${cert.summary}</p>` : ""}
-          <div class="certificate-card__actions">
-            <a class="button button--ghost" href="${cert.url ?? "#"}" target="_blank" rel="noopener">${viewLabel}</a>
-          </div>
+          ${
+            cert.url
+              ? `<div class="certificate-card__actions">
+                   <a class="button button--ghost" href="${cert.url}" target="_blank" rel="noopener">${viewLabel}</a>
+                 </div>`
+              : ""
+          }
         </article>
       `
     )
@@ -484,7 +492,7 @@ const updateLabDetail = (index = 0) => {
 const renderContact = (contact = {}) => {
   const info = document.querySelector("[data-contact-info]");
   if (info) {
-    const phoneDisplay = contact.phoneLabel || contact.phone || (currentLang === "ar" ? "اتصال" : "Call");
+    const phoneDisplay = contact.phoneLabel || contact.phone || (currentLang === "ar" ? "اتصل" : "Call");
     const waText = encodeURIComponent(contact.whatsappMessage || "");
     const whatsappHref = contact.whatsapp
       ? (() => {
@@ -509,7 +517,7 @@ const renderContact = (contact = {}) => {
         label: contact.labels?.socials ?? "",
         value: (contact.socials || [])
           .map((social) => `<a href="${social.url}" target="_blank" rel="noopener">${social.label}</a>`)
-          .join(" · "),
+          .join(" | "),
       },
     ].filter(Boolean);
     info.innerHTML = `
@@ -873,3 +881,8 @@ const initAccentToggle = () => {
 };
 
 document.addEventListener("DOMContentLoaded", init);
+
+
+
+
+
