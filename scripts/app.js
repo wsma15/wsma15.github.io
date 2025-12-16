@@ -39,6 +39,46 @@ const accentThemes = [
   },
 ];
 
+const monthNames = {
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  ar: [
+    "يناير",
+    "فبراير",
+    "مارس",
+    "أبريل",
+    "مايو",
+    "يونيو",
+    "يوليو",
+    "أغسطس",
+    "سبتمبر",
+    "أكتوبر",
+    "نوفمبر",
+    "ديسمبر",
+  ],
+};
+
+const formatYearMonth = (value = "") => {
+  const str = String(value).trim();
+  if (!str) return null;
+  const ymMatch = str.match(/^(\d{4})[-/\.](\d{1,2})$/);
+  if (ymMatch) {
+    const year = ymMatch[1];
+    const monthIndex = Number(ymMatch[2]) - 1;
+    const month =
+      monthNames[currentLang]?.[monthIndex] ?? monthNames.en?.[monthIndex] ?? ymMatch[2].padStart(2, "0");
+    return { primary: month, secondary: year };
+  }
+  const yMatch = str.match(/^(\d{4})$/);
+  if (yMatch) return { primary: yMatch[1], secondary: "" };
+  return { primary: str, secondary: "" };
+};
+
+const formatPeriodLabel = (value = "") => {
+  const formatted = formatYearMonth(value);
+  if (formatted) return formatted.secondary ? `${formatted.primary} ${formatted.secondary}` : formatted.primary;
+  return value || "";
+};
+
 const init = () => {
   if (!activeData) return;
   applyLanguageAttributes();
@@ -71,8 +111,8 @@ const init = () => {
   initSmoothScroll();
   initRevealAnimations();
   initHeroParallax();
-    initAccentToggle();
-    initNavToggle();
+  initAccentToggle();
+  initNavToggle();
 };
 
   /* Mobile nav toggle: show/hide centered nav on small screens */
@@ -302,10 +342,16 @@ const computeDynamicStatValue = (stat = {}) => {
 const renderTimeline = (experiences = []) => {
   const container = $("[data-experience]");
   if (!container) return;
+  const readMoreLabel = currentLang === "ar" ? "عرض المزيد..." : "Read more...";
+  const showLessLabel = currentLang === "ar" ? "إخفاء التفاصيل" : "Show less";
 
   container.innerHTML = experiences
     .map(
-      (exp) => `
+      (exp) => {
+        const highlights = Array.isArray(exp.highlights) ? exp.highlights : [];
+        const [firstHighlight, ...restHighlights] = highlights;
+        const hasMore = restHighlights.length > 0;
+        return `
       <article class="timeline-item tilt-card" data-tilt>
         <div class="timeline__meta">
           <span>${exp.period ?? ""}</span>
@@ -313,16 +359,67 @@ const renderTimeline = (experiences = []) => {
         </div>
         <h3>${exp.title ?? ""}</h3>
         <p>${exp.description ?? ""}</p>
-        <ul>
-          ${(exp.highlights || []).map((item) => `<li>${item}</li>`).join("")}
-        </ul>
+        ${
+          firstHighlight
+            ? `
+              <ul class="timeline__highlights" data-highlight-list>
+                <li class="timeline__highlight is-primary">${firstHighlight}</li>
+                ${restHighlights
+                  .map((item) => `<li class="timeline__highlight is-collapsed" hidden>${item}</li>`)
+                  .join("")}
+              </ul>
+              ${
+                hasMore
+                  ? `<button
+                      class="link-button"
+                      type="button"
+                      data-highlight-toggle
+                      data-open-label="${readMoreLabel}"
+                      data-close-label="${showLessLabel}"
+                    >
+                      ${readMoreLabel}
+                    </button>`
+                  : ""
+              }
+            `
+            : ""
+        }
         <div class="timeline__tags">
           ${(exp.stack || []).map((tag) => `<span class="chip">${tag}</span>`).join("")}
         </div>
       </article>
-    `
+    `;
+      }
     )
     .join("");
+  initHighlightToggles();
+};
+
+const initHighlightToggles = () => {
+  const toggles = $$("[data-highlight-toggle]");
+  toggles.forEach((button) => {
+    const list =
+      button.previousElementSibling?.matches?.("[data-highlight-list]")
+        ? button.previousElementSibling
+        : button.closest(".timeline-item")?.querySelector("[data-highlight-list]");
+    if (!list) return;
+    const collapsedItems = $$("li.is-collapsed", list);
+    if (!collapsedItems.length) {
+      button.remove();
+      return;
+    }
+    button.dataset.state = "closed";
+    button.addEventListener("click", () => {
+      const isOpen = button.dataset.state === "open";
+      collapsedItems.forEach((item) => {
+        item.hidden = isOpen;
+      });
+      button.dataset.state = isOpen ? "closed" : "open";
+      button.textContent = isOpen
+        ? button.dataset.openLabel || "Read more..."
+        : button.dataset.closeLabel || "Show less";
+    });
+  });
 };
 
 const renderSkills = (skills = {}) => {
@@ -377,16 +474,25 @@ const renderCertificates = (certificates = [], copy = {}) => {
 
   wrap.innerHTML = certificates
     .map(
-      (cert) => `
+      (cert) => {
+        const dateLabel = cert.year ? formatYearMonth(cert.year) : null;
+        return `
         <article class="certificate-card tilt-card" data-tilt>
-          <div class="certificate-card__meta">
-            <div>
+          <div class="certificate-card__header">
+            ${
+              dateLabel
+                ? `<div class="date-pill" aria-hidden="true">
+                    <span>${dateLabel.primary}</span>
+                    ${dateLabel.secondary ? `<small>${dateLabel.secondary}</small>` : ""}
+                   </div>`
+                : ""
+            }
+            <div class="certificate-card__meta">
               <p class="eyebrow">${cert.issuer ?? ""}</p>
               <h3>${cert.title ?? ""}</h3>
             </div>
-            ${cert.year ? `<span class="chip">${cert.year}</span>` : ""}
           </div>
-          ${cert.summary ? `<p>${cert.summary}</p>` : ""}
+          ${cert.summary ? `<p class="certificate-card__summary">${cert.summary}</p>` : ""}
           ${
             cert.url
               ? `<div class="certificate-card__actions">
@@ -395,7 +501,8 @@ const renderCertificates = (certificates = [], copy = {}) => {
               : ""
           }
         </article>
-      `
+      `;
+      }
     )
     .join("");
 };
@@ -406,13 +513,17 @@ const renderCaseStudies = (caseStudies = [], workCopy = {}) => {
   const viewLabel = workCopy?.viewProject || "View project";
   track.innerHTML = caseStudies
     .map(
-      (caseStudy) => `
+      (caseStudy) => {
+        const periodLabel = formatPeriodLabel(caseStudy.period);
+        return `
         <article class="case-card tilt-card" data-tilt>
           <div class="case-card__head">
-            <h3>${caseStudy.title ?? ""}</h3>
-            <span class="meta-label">${caseStudy.period ?? ""}</span>
+            <div>
+              <h3>${caseStudy.title ?? ""}</h3>
+              ${periodLabel ? `<span class="case-card__period">${periodLabel}</span>` : ""}
+            </div>
           </div>
-          <p>${caseStudy.summary ?? ""}</p>
+          <p class="case-card__summary">${caseStudy.summary ?? ""}</p>
           <div class="case-card__tags">
             ${(caseStudy.tags || []).map((tag) => `<span class="chip">${tag}</span>`).join("")}
           </div>
@@ -440,7 +551,8 @@ const renderCaseStudies = (caseStudies = [], workCopy = {}) => {
               : ""
           }
         </article>
-      `
+      `;
+      }
     )
     .join("");
 
@@ -678,16 +790,21 @@ const initCaseSlider = () => {
   const progress = $("[data-cases-progress]");
   const buttons = $$("[data-case-nav]");
   if (!track || !progress) return;
+  const isRtl = document.documentElement.dir === "rtl";
 
   const updateProgress = () => {
     const max = track.scrollWidth - track.clientWidth;
-    const ratio = max > 0 ? track.scrollLeft / max : 0;
+    const rawOffset = track.scrollLeft;
+    const normalized = isRtl ? max + rawOffset : rawOffset;
+    const safeOffset = Math.min(Math.max(normalized, 0), Math.max(max, 1));
+    const ratio = max > 0 ? safeOffset / max : 0;
     progress.style.transform = `scaleX(${ratio || 0.05})`;
   };
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const direction = btn.dataset.caseNav === "next" ? 1 : -1;
+      const dir = btn.dataset.caseNav === "next" ? 1 : -1;
+      const direction = isRtl ? dir * -1 : dir;
       track.scrollBy({
         left: direction * (track.clientWidth * 0.8),
         behavior: "smooth",
