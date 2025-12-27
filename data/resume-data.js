@@ -1,4 +1,4 @@
-export const resumeData = {
+﻿export const resumeData = {
   ar: {
     pageTitle: "حسين الويسي | مهندس برمجيات .NET",
     hero: {
@@ -22,9 +22,9 @@ export const resumeData = {
         "SQL Server و Entity Framework",
         "أتمتة Crystal Reports",
       ],
-      dynamicRoles: ["أبني أدوات محاسبية موثوقة", "أطور تطبيقات ‎.NET مؤسسية", "أؤتمت التقارير المالية"],
-      clientsHeading: "الفرق التي دعمتها",
-      clients: ["مجموعة محاسبة موزون", "مسارات ومرفقات Medu", "منشئ الهيكل التنظيمي للموارد البشرية", "PureActive"],
+      dynamicRoles: ["أبني أدوات محاسبية موثوقة", "أُطلق تطبيقات .NET مؤسسية", "أؤتمت التقارير المالية"],
+      clientsHeading: "فرق عمل دعمتها",
+      clients: ["Mozon Accounting", "HR Org Builder", "Attachments", "PureActive"],
       score: 35,
       scoreSuffix: "%",
       scoreLabel: "تسريع العمليات",
@@ -204,18 +204,18 @@ export const resumeData = {
     },
     certificates: [
       {
-        title: "بكالوريوس هندسة البرمجيات",
-        issuer: "جامعة الحسين بن طلال",
-        year: "2024-09",
-        summary: "درجة البكالوريوس في هندسة البرمجيات بمعدل 74.36% مع تركيز على أنظمة المؤسسات وقواعد البيانات.",
-        url: "",
-      },
-      {
         title: "Advanced Data Analytics",
         issuer: "USAID",
         year: "2025-06",
         summary: "منهج تحليلات بيانات متقدمة لاتخاذ قرارات المنتج ومؤشرات الأداء التشغيلية.",
         url: "assets/Advanced%20Data%20Anlytics%20-%20USAID.pdf",
+      },
+      {
+        title: "بكالوريوس هندسة البرمجيات",
+        issuer: "جامعة الحسين بن طلال",
+        year: "2024-09",
+        summary: "درجة البكالوريوس في هندسة البرمجيات بمعدل 74.36% مع تركيز على أنظمة المؤسسات وقواعد البيانات.",
+        url: "",
       },
       {
         title: "PostgreSQL",
@@ -248,6 +248,27 @@ export const resumeData = {
     ],
     caseStudies: [
       {
+        title: "التكعيب المعماري",
+        period: "2025",
+        summary: "منصة توريد رسمية لمواد البناء (أخشاب، حديد تسليح، عزل وتجهيزات) بخطوات واضحة، تسعير موثق، وتواصل موحّد حتى التسليم.",
+        tags: ["منصة توريد", "تجربة عربية", "واجهة تفاعلية"],
+        metrics: [
+          { label: "عرض مباشر", value: "Web demo" },
+          { label: "التصيير", value: "WebGL" },
+        ],
+        link: "https://wsma15.github.io/ArchitecturalCubism/",
+      },
+      {
+        title: "موزون للمحاسبة",
+        period: "2025",
+        summary: "حزمة سطح مكتب تدير أنواع القيود والحسابات والتقارير المالية المؤتمتة.",
+        tags: ["WinForms", "SQL Server", "Crystal Reports"],
+        metrics: [
+          { label: "خفض العمل اليدوي", value: "35%" },
+          { label: "توفير زمن التقارير", value: "30%" },
+        ],
+      },
+      {
         title: "منصة PureActive",
         period: "2024",
         summary: "تجربة لياقة وتغذية تربط خطط الطعام بالتمارين وتدفع التحليلات للمدربين لحظيًا.",
@@ -266,27 +287,6 @@ export const resumeData = {
           { label: "زيادة سرعة البحث", value: "25%" },
           { label: "تسليم بلا تسليمات مطولة", value: "0 handoffs" },
         ],
-      },
-      {
-        title: "موزون للمحاسبة",
-        period: "2025",
-        summary: "حزمة سطح مكتب تدير أنواع القيود والحسابات والتقارير المالية المؤتمتة.",
-        tags: ["WinForms", "SQL Server", "Crystal Reports"],
-        metrics: [
-          { label: "خفض العمل اليدوي", value: "35%" },
-          { label: "توفير زمن التقارير", value: "30%" },
-        ],
-      },
-      {
-        title: "التكعيب المعماري",
-        period: "2025",
-        summary: "منصة توريد رسمية لمواد البناء (أخشاب، حديد تسليح، عزل وتجهيزات) بخطوات واضحة، تسعير موثق، وتواصل موحّد حتى التسليم.",
-        tags: ["منصة توريد", "تجربة عربية", "واجهة تفاعلية"],
-        metrics: [
-          { label: "عرض مباشر", value: "Web demo" },
-          { label: "التصيير", value: "WebGL" },
-        ],
-        link: "https://wsma15.github.io/ArchitecturalCubism/",
       },
     ],
     lab: [
@@ -367,7 +367,7 @@ export const resumeData = {
       ],
       dynamicRoles: ["Builds reliable accounting tools", "Ships enterprise .NET apps", "Automates financial reporting"],
       clientsHeading: "Teams I've supported",
-      clients: ["Mozon Accounting Suite", "Medu Attachments & Workflow", "HR Org Builder", "PureActive"],
+      clients: ["Mozon Accounting", "HR Org Builder", "Attachments", "PureActive"],
       score: 35,
       scoreSuffix: "%",
       scoreLabel: "Ops acceleration",
@@ -557,18 +557,18 @@ export const resumeData = {
     },
     certificates: [
       {
-        title: "B.Sc. Software Engineering",
-        issuer: "Al-Hussein Bin Talal University",
-        year: "2024-09",
-        summary: "Bachelor's degree in Software Engineering (GPA 74.36%) focused on enterprise systems and databases.",
-        url: "",
-      },
-      {
         title: "Advanced Data Analytics",
         issuer: "USAID",
         year: "2025-06",
         summary: "Advanced analytics curriculum for product decisions and operational KPIs.",
         url: "assets/Advanced%20Data%20Anlytics%20-%20USAID.pdf",
+      },
+      {
+        title: "B.Sc. Software Engineering",
+        issuer: "Al-Hussein Bin Talal University",
+        year: "2024-09",
+        summary: "Bachelor's degree in Software Engineering (GPA 74.36%) focused on enterprise systems and databases.",
+        url: "",
       },
       {
         title: "PostgreSQL",
@@ -601,10 +601,30 @@ export const resumeData = {
     ],
     caseStudies: [
       {
+        title: "Architectural Cubism",
+        period: "2025",
+        summary: "Official supply platform for timber, steel, insulation, and fit-out materials with documented pricing, unified communication, and clear delivery steps.",
+        tags: ["Supply platform", "Arabic UX", "WebGL experience"],
+        metrics: [
+          { label: "Live showcase", value: "Web demo" },
+          { label: "Rendering", value: "WebGL" },
+        ],
+        link: "https://wsma15.github.io/ArchitecturalCubism/",
+      },
+      {
+        title: "Mozon Accounting",
+        period: "2025",
+        summary: "Desktop suite that manages journal types, accounts, and automated financial statements.",
+        tags: ["WinForms", "SQL Server", "Crystal Reports"],
+        metrics: [
+          { label: "Manual work reduced", value: "35%" },
+          { label: "Reporting time saved", value: "30%" },
+        ],
+      },
+      {
         title: "PureActive Platform",
         period: "2024",
-        summary:
-          "Fitness + nutrition experience syncing food plans with workouts and pushing insights to trainers instantly.",
+        summary: "Fitness + nutrition experience syncing food plans with workouts and pushing insights to trainers instantly.",
         tags: ["Flutter", "Firebase", "Health Tech"],
         metrics: [
           { label: "Recommendation accuracy", value: "35%+" },
@@ -620,28 +640,7 @@ export const resumeData = {
           { label: "Lookup speed gain", value: "25%" },
           { label: "Updates required devs", value: "0 handoffs" },
         ],
-      },
-      {
-        title: "Mozon Accounting",
-        period: "2025",
-        summary: "Desktop suite that manages journal types, accounts, and automated financial statements.",
-        tags: ["WinForms", "SQL Server", "Crystal Reports"],
-        metrics: [
-          { label: "Manual work reduced", value: "35%" },
-          { label: "Reporting time saved", value: "30%" },
-        ],
-      },
-      {
-        title: "Architectural Cubism",
-        period: "2025",
-        summary: "Official supply platform for timber, steel, insulation, and fit-out materials with documented pricing, unified communication, and clear delivery steps.",
-        tags: ["Supply platform", "Arabic UX", "WebGL experience"],
-        metrics: [
-          { label: "Live showcase", value: "Web demo" },
-          { label: "Rendering", value: "WebGL" },
-        ],
-        link: "https://wsma15.github.io/ArchitecturalCubism/",
-      },
+      }
     ],
     lab: [
       {

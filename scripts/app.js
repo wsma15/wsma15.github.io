@@ -1,4 +1,4 @@
-﻿import { resumeData } from "../data/resume-data.js";
+import { resumeData } from "../data/resume-data.js";
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
@@ -95,6 +95,7 @@ const init = () => {
   renderLab(activeData.lab, activeData.copy?.labDetail);
   renderContact(activeData.contact);
   renderFooter(activeData.hero, activeData.copy?.footer);
+  initRevealAnimations();
   initSplashScreen();
 
   initThemeToggle();
@@ -109,7 +110,6 @@ const init = () => {
   initLabInteractions();
   initContactForm();
   initSmoothScroll();
-  initRevealAnimations();
   initHeroParallax();
   initAccentToggle();
   initNavToggle();
@@ -315,6 +315,11 @@ const renderStats = (stats = []) => {
   const statsWrap = $("[data-stats]");
   if (!statsWrap) return;
 
+  if (!Array.isArray(stats) || stats.length === 0) {
+    statsWrap.innerHTML = "";
+    return;
+  }
+
   statsWrap.innerHTML = stats
     .map(
       (stat) => `
@@ -342,59 +347,173 @@ const computeDynamicStatValue = (stat = {}) => {
 const renderTimeline = (experiences = []) => {
   const container = $("[data-experience]");
   if (!container) return;
-  const readMoreLabel = currentLang === "ar" ? "عرض المزيد..." : "Read more...";
-  const showLessLabel = currentLang === "ar" ? "إخفاء التفاصيل" : "Show less";
 
-  container.innerHTML = experiences
-    .map(
-      (exp) => {
-        const highlights = Array.isArray(exp.highlights) ? exp.highlights : [];
-        const [firstHighlight, ...restHighlights] = highlights;
-        const hasMore = restHighlights.length > 0;
-        return `
-      <article class="timeline-item tilt-card" data-tilt>
-        <div class="timeline__meta">
-          <span>${exp.period ?? ""}</span>
-          <span>${exp.company ?? ""}</span>
+  const labels = currentLang === "ar"
+    ? { role: "دور", roles: "أدوار", view: "عرض التفاصيل", wins: "إنجازات أساسية" }
+    : { role: "role", roles: "roles", view: "View details", wins: "key wins" };
+  const roleLabel = (count) => `${count} ${count === 1 ? labels.role : labels.roles}`;
+
+  if (!Array.isArray(experiences) || experiences.length === 0) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const groups = [];
+  experiences.forEach((exp) => {
+    const company = exp.company || "Experience";
+    const existing = groups.find((g) => g.company === company);
+    if (existing) {
+      existing.items.push(exp);
+    } else {
+      groups.push({ company, items: [exp] });
+    }
+  });
+
+  const buildPreview = (group) => {
+    const flattened = group.items.flatMap((item) => item.highlights || []);
+    const safeHighlights = flattened.length ? flattened : group.items.map((item) => item.description).filter(Boolean);
+    return safeHighlights.slice(0, 3);
+  };
+
+  const uniqueStack = (group) => {
+    const all = group.items.flatMap((item) => item.stack || []);
+    return [...new Set(all)];
+  };
+
+  const formatRange = (group) => {
+    const first = group.items[0]?.period || "";
+    const last = group.items[group.items.length - 1]?.period || "";
+    if (first && last && first !== last) return `${first} -> ${last}`;
+    return first || last;
+  };
+
+  const cards = groups
+    .map((group, index) => {
+      const preview = buildPreview(group);
+      const stack = uniqueStack(group);
+      const impactCount = preview.length;
+      const impactMeter = Math.min(100, Math.max(30, impactCount * 30));
+      const latestTitle = group.items[0]?.title || "";
+      return `
+        <article class="experience-card tilt-card" data-tilt data-experience-card data-index="${index}">
+          <div class="experience-card__head">
+            <div>
+              <p class="eyebrow">${group.company}</p>
+              ${latestTitle ? `<h3>${latestTitle}</h3>` : ""}
+            </div>
+            <div class="experience-card__count">${roleLabel(group.items.length)}</div>
+          </div>
+          ${formatRange(group) ? `<p class="experience-card__period">${formatRange(group)}</p>` : ""}
+          ${
+            preview.length
+              ? `<ul class="experience-card__highlights">
+                  ${preview.map((item) => `<li>${item}</li>`).join("")}
+                </ul>`
+              : ""
+          }
+          <div class="experience-card__meter">
+            <span style="--meter:${impactMeter}%;"></span>
+            <small>${impactCount || 1} ${labels.wins}</small>
+          </div>
+          ${
+            stack.length
+              ? `<div class="experience-card__stack">
+                  ${stack.map((tag) => `<span class="chip">${tag}</span>`).join("")}
+                </div>`
+              : ""
+          }
+          <button class="link-button experience-card__action" type="button" data-experience-open>
+            ${labels.view}
+          </button>
+        </article>
+      `;
+    })
+    .join("");
+
+  container.innerHTML = `
+    <div class="experience-board">
+      <div class="experience-board__list" data-experience-list>
+        ${cards}
+      </div>
+      <div class="experience-board__detail" data-experience-detail></div>
+    </div>
+  `;
+
+  const detailTarget = $("[data-experience-detail]", container);
+  const renderDetail = (group) => {
+    if (!detailTarget) return;
+    const stack = uniqueStack(group);
+    const range = formatRange(group);
+    detailTarget.innerHTML = `
+      <div class="experience-detail__header">
+        <div>
+          <p class="eyebrow">${roleLabel(group.items.length)}</p>
+          <h3>${group.company}</h3>
+          ${range ? `<p class="experience-detail__period">${range}</p>` : ""}
         </div>
-        <h3>${exp.title ?? ""}</h3>
-        <p>${exp.description ?? ""}</p>
         ${
-          firstHighlight
-            ? `
-              <ul class="timeline__highlights" data-highlight-list>
-                <li class="timeline__highlight is-primary">${firstHighlight}</li>
-                ${restHighlights
-                  .map((item) => `<li class="timeline__highlight is-collapsed" hidden>${item}</li>`)
-                  .join("")}
-              </ul>
-              ${
-                hasMore
-                  ? `<button
-                      class="link-button"
-                      type="button"
-                      data-highlight-toggle
-                      data-open-label="${readMoreLabel}"
-                      data-close-label="${showLessLabel}"
-                    >
-                      ${readMoreLabel}
-                    </button>`
-                  : ""
-              }
-            `
+          stack.length
+            ? `<div class="experience-detail__stack">
+                ${stack.map((tag) => `<span class="chip">${tag}</span>`).join("")}
+              </div>`
             : ""
         }
-        <div class="timeline__tags">
-          ${(exp.stack || []).map((tag) => `<span class="chip">${tag}</span>`).join("")}
-        </div>
-      </article>
+      </div>
+      <div class="experience-detail__roles">
+        ${group.items
+          .map(
+            (item) => `
+              <article class="experience-role">
+                <div class="experience-role__meta">
+                  ${item.period ? `<span class="timeline__pill timeline__pill--period">${item.period}</span>` : ""}
+                  ${item.title ? `<strong>${item.title}</strong>` : ""}
+                </div>
+                ${item.description ? `<p class="experience-role__summary">${item.description}</p>` : ""}
+                ${
+                  Array.isArray(item.highlights) && item.highlights.length
+                    ? `<ul class="experience-role__highlights">
+                        ${item.highlights.map((hl) => `<li>${hl}</li>`).join("")}
+                      </ul>`
+                    : ""
+                }
+                ${
+                  (item.stack || []).length
+                    ? `<div class="timeline__tags">
+                        ${(item.stack || []).map((tag) => `<span class="chip">${tag}</span>`).join("")}
+                      </div>`
+                    : ""
+                }
+              </article>
+            `
+          )
+          .join("")}
+      </div>
     `;
-      }
-    )
-    .join("");
+  };
+
+  const cardsEls = $$("[data-experience-card]", container);
+  const listEl = $("[data-experience-list]", container);
+  const setActive = (index) => {
+    cardsEls.forEach((card) => card.classList.toggle("is-active", Number(card.dataset.index) === index));
+    const group = groups[index];
+    if (group) renderDetail(group);
+  };
+
+  cardsEls.forEach((card) => {
+    card.addEventListener("click", () => setActive(Number(card.dataset.index)));
+    const btn = card.querySelector("[data-experience-open]");
+    if (btn) {
+      btn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        setActive(Number(card.dataset.index));
+        listEl?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  });
+
+  setActive(0);
   initHighlightToggles();
 };
-
 const initHighlightToggles = () => {
   const toggles = $$("[data-highlight-toggle]");
   toggles.forEach((button) => {
@@ -472,6 +591,11 @@ const renderCertificates = (certificates = [], copy = {}) => {
   if (!wrap) return;
   const viewLabel = copy?.cta || "View certificate";
 
+  if (!Array.isArray(certificates) || certificates.length === 0) {
+    wrap.innerHTML = "";
+    return;
+  }
+
   wrap.innerHTML = certificates
     .map(
       (cert) => {
@@ -511,6 +635,13 @@ const renderCaseStudies = (caseStudies = [], workCopy = {}) => {
   const track = $("[data-cases-track]");
   if (!track) return;
   const viewLabel = workCopy?.viewProject || "View project";
+
+  if (!Array.isArray(caseStudies) || caseStudies.length === 0) {
+    track.innerHTML = "";
+    updateCaseNavLabels(workCopy?.controls);
+    return;
+  }
+
   track.innerHTML = caseStudies
     .map(
       (caseStudy) => {
@@ -574,6 +705,12 @@ const renderLab = (steps = [], labDetailCopy = {}) => {
   const detailEyebrow = $("[data-lab-detail-eyebrow]");
   if (detailEyebrow && labDetailCopy?.eyebrow) detailEyebrow.textContent = labDetailCopy.eyebrow;
   if (!cardsWrap) return;
+
+  if (!Array.isArray(steps) || steps.length === 0) {
+    cardsWrap.innerHTML = "";
+    labSteps = [];
+    return;
+  }
 
   cardsWrap.innerHTML = steps
     .map(
@@ -717,6 +854,16 @@ const initScrollProgress = () => {
 const initCounters = () => {
   const counters = $$("[data-countup]");
   if (!counters.length) return;
+
+  if (typeof IntersectionObserver === "undefined") {
+    counters.forEach((counter) => {
+      const target = Number(counter.dataset.value || 0);
+      const suffix = counter.dataset.suffix || "";
+      counter.textContent = `${target}${suffix}`;
+    });
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -753,12 +900,22 @@ const animateCounter = (el) => {
 const initSkillBars = () => {
   const bars = $$("[data-skill-value]");
   if (!bars.length) return;
+
+  const applyValue = (bar) => {
+    const value = Number(bar.dataset.skillValue);
+    bar.style.transform = `scaleX(${value / 100})`;
+  };
+
+  if (typeof IntersectionObserver === "undefined") {
+    bars.forEach(applyValue);
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const value = Number(entry.target.dataset.skillValue);
-          entry.target.style.transform = `scaleX(${value / 100})`;
+          applyValue(entry.target);
           observer.unobserve(entry.target);
         }
       });
@@ -944,6 +1101,12 @@ const initSmoothScroll = () => {
 const initRevealAnimations = () => {
   const targets = $$(".hero, .section, .site-footer, .timeline-item, .case-card, .skill-card, .lab-card, .testimonial-card");
   if (!targets.length) return;
+
+  if (typeof IntersectionObserver === "undefined") {
+    targets.forEach((target) => target.classList.add("is-visible"));
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -998,8 +1161,3 @@ const initAccentToggle = () => {
 };
 
 document.addEventListener("DOMContentLoaded", init);
-
-
-
-
-
